@@ -22,6 +22,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -42,1200 +45,789 @@
   </script>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { background: #0a0a08; }
-    html.has-reveal .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
-    html.has-reveal .reveal.is-visible { opacity: 1; transform: translateY(0); }
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: #0a0a08;
-      color: #e8e0d4;
-      line-height: 1.6;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
+    html { background: #0a0a08; scroll-behavior: smooth; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: #0a0a08; color: #e8e0d4; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
     h1,h2,h3,h4 { font-family: 'Playfair Display', serif; font-weight: 700; }
     img { max-width: 100%; display: block; }
     a { color: inherit; text-decoration: none; }
 
     /* ── Preloader ── */
-    .preloader {
-      position: fixed; inset: 0; z-index: 9999;
-      background: #0a0a08;
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 24px;
-    }
-    .preloader-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      color: #c9a96e; letter-spacing: 4px;
-      opacity: 0; transform: translateY(20px);
-    }
-    .preloader-bar-track {
-      width: 200px; height: 2px;
-      background: rgba(201,169,110,0.15);
-      border-radius: 2px; overflow: hidden;
-    }
-    .preloader-bar {
-      width: 0%; height: 100%;
-      background: #c9a96e; border-radius: 2px;
-    }
-    .preloader-percent {
-      font-size: 0.75rem; color: rgba(201,169,110,0.5);
-      letter-spacing: 4px; font-weight: 300;
-    }
+    .preloader { position: fixed; inset: 0; z-index: 9999; background: #0a0a08; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 24px; }
+    .preloader-logo { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); color: #c9a96e; letter-spacing: 4px; }
+    .preloader-bar-track { width: 200px; height: 2px; background: rgba(201,169,110,0.15); border-radius: 2px; overflow: hidden; }
+    .preloader-bar { width: 0%; height: 100%; background: #c9a96e; border-radius: 2px; transition: width 0.1s; }
+    .preloader-percent { font-size: 0.75rem; color: rgba(201,169,110,0.5); letter-spacing: 4px; font-weight: 300; }
     .preloader.done { pointer-events: none; }
 
-    /* ── Custom Cursor ── */
-    .cursor {
-      width: 20px; height: 20px;
-      border: 1.5px solid rgba(201,169,110,0.6);
-      border-radius: 50%;
-      position: fixed; top: 0; left: 0;
-      pointer-events: none; z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: width 0.3s, height 0.3s, border-color 0.3s;
-      mix-blend-mode: difference;
-    }
+    /* ── Cursor ── */
+    .cursor { width: 20px; height: 20px; border: 1.5px solid rgba(201,169,110,0.6); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width 0.3s, height 0.3s, border-color 0.3s; mix-blend-mode: difference; }
     .cursor.hover { width: 50px; height: 50px; border-color: #c9a96e; }
 
     /* ── Nav ── */
-    .nav {
-      position: fixed; top: 0; left: 0; width: 100%;
-      z-index: 100; padding: 24px 48px;
-      display: flex; justify-content: space-between; align-items: center;
-      mix-blend-mode: difference;
-    }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem; letter-spacing: 3px; color: #fff;
-    }
+    .nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; mix-blend-mode: difference; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; letter-spacing: 3px; color: #fff; }
     .nav-links { display: flex; gap: 32px; list-style: none; }
-    .nav-links a {
-      font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
-      color: rgba(255,255,255,0.6); font-weight: 300;
-      transition: color 0.3s;
-    }
+    .nav-links a { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); font-weight: 300; transition: color 0.3s; }
     .nav-links a:hover { color: #fff; }
-    .nav-cta {
-      background: #c9a96e; color: #0a0a08 !important;
-      padding: 10px 24px; border-radius: 100px;
-      font-weight: 600 !important; letter-spacing: 1px;
-      transition: transform 0.3s;
-    }
+    .nav-cta { background: #c9a96e; color: #0a0a08 !important; padding: 10px 24px; border-radius: 100px; font-weight: 600 !important; letter-spacing: 1px; transition: transform 0.3s; }
     .nav-cta:hover { transform: scale(1.05); }
 
     /* ── Hero ── */
-    .hero {
-      height: 100dvh; position: relative;
-      display: flex; align-items: flex-end;
-      padding: 0 48px clamp(60px, 8vh, 100px);
-      overflow: hidden;
-    }
-    .hero-video-wrap {
-      position: absolute; inset: 0;
-    }
-    .hero-video-wrap video {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: brightness(0.35) saturate(0.8);
-    }
-    .hero-video-wrap::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(180deg,
-        rgba(10,10,8,0.3) 0%,
-        rgba(10,10,8,0.1) 40%,
-        rgba(10,10,8,0.6) 80%,
-        rgba(10,10,8,1) 100%
-      );
-    }
-    .hero-content {
-      position: relative; z-index: 2;
-      max-width: 900px; padding-bottom: 40px;
-    }
-    .hero-tag {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase;
-      color: #c9a96e; margin-bottom: 24px;
-      opacity: 0;
-    }
-    .hero-tag::before {
-      content: ''; width: 32px; height: 1px; background: #c9a96e;
-    }
-    .hero h1 {
-      font-size: clamp(3rem, 7.5vw, 6.5rem);
-      line-height: 1.02; font-weight: 900;
-      margin-bottom: 24px;
-    }
-    .hero-word {
-      display: inline-block;
-      overflow: hidden;
-      vertical-align: bottom;
-    }
-    .hero-word-inner {
-      display: inline-block;
-      transform: translateY(110%);
-    }
+    .hero { height: 100dvh; position: relative; display: flex; align-items: flex-end; padding: 0 48px clamp(60px,8vh,100px); overflow: hidden; }
+    .hero-video-wrap { position: absolute; inset: 0; }
+    .hero-video-wrap video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.35) saturate(0.8); }
+    .hero-video-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,8,0.3) 0%, rgba(10,10,8,0.1) 40%, rgba(10,10,8,0.6) 80%, rgba(10,10,8,1) 100%); }
+    .hero-content { position: relative; z-index: 2; max-width: 900px; padding-bottom: 40px; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: #c9a96e; margin-bottom: 24px; }
+    .hero-tag::before { content: ''; width: 32px; height: 1px; background: #c9a96e; }
+    .hero h1 { font-size: clamp(3rem,7.5vw,6.5rem); line-height: 1.02; font-weight: 900; margin-bottom: 24px; }
+    .hero-word { display: inline-block; overflow: hidden; vertical-align: bottom; }
+    .hero-word-inner { display: inline-block; transform: translateY(110%); }
     .hero-word-inner.accent { color: #c9a96e; }
-    .hero-sub {
-      font-size: clamp(0.9rem, 1.8vw, 1.1rem);
-      font-weight: 300; color: rgba(232,224,212,0.5);
-      max-width: 480px; line-height: 1.8;
-      opacity: 0;
-    }
-    .hero-scroll {
-      position: absolute; bottom: 40px; right: 48px;
-      z-index: 2; display: flex; flex-direction: column;
-      align-items: center; gap: 8px;
-    }
-    .hero-scroll-text {
-      font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase;
-      color: rgba(255,255,255,0.3); writing-mode: vertical-rl;
-    }
-    .hero-scroll-line {
-      width: 1px; height: 60px;
-      background: rgba(201,169,110,0.3);
-      position: relative; overflow: hidden;
-    }
-    .hero-scroll-line::after {
-      content: ''; position: absolute; top: -100%;
-      width: 100%; height: 100%;
-      background: #c9a96e;
-      animation: scrollLine 2s infinite;
-    }
-    @keyframes scrollLine {
-      0% { top: -100%; }
-      100% { top: 100%; }
-    }
+    .hero-sub { font-size: clamp(0.9rem,1.8vw,1.1rem); font-weight: 300; color: rgba(232,224,212,0.5); max-width: 480px; line-height: 1.8; }
+    .hero-scroll { position: absolute; bottom: 40px; right: 48px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .hero-scroll-text { font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.3); writing-mode: vertical-rl; }
+    .hero-scroll-line { width: 1px; height: 60px; background: rgba(201,169,110,0.3); position: relative; overflow: hidden; }
+    .hero-scroll-line::after { content: ''; position: absolute; top: -100%; width: 100%; height: 100%; background: #c9a96e; animation: scrollLine 2s infinite; }
+    @keyframes scrollLine { 0%{top:-100%} 100%{top:100%} }
 
     /* ── Marquee ── */
-    .marquee-section {
-      padding: clamp(40px, 6vh, 60px) 0;
-      border-top: 1px solid rgba(201,169,110,0.06);
-      border-bottom: 1px solid rgba(201,169,110,0.06);
-      overflow: hidden;
-    }
-    .marquee-label {
-      text-align: center; font-size: 0.65rem;
-      letter-spacing: 4px; text-transform: uppercase;
-      color: rgba(201,169,110,0.4); margin-bottom: 24px;
-    }
-    .marquee-track {
-      display: flex; width: max-content;
-      animation: marqueeScroll 30s linear infinite;
-    }
+    .marquee-section { padding: clamp(40px,6vh,60px) 0; border-top: 1px solid rgba(201,169,110,0.06); border-bottom: 1px solid rgba(201,169,110,0.06); overflow: hidden; }
+    .marquee-label { text-align: center; font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(201,169,110,0.4); margin-bottom: 24px; }
+    .marquee-track { display: flex; width: max-content; animation: marqueeScroll 30s linear infinite; }
     .marquee-track:hover { animation-play-state: paused; }
-    @keyframes marqueeScroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    .marquee-item {
-      flex-shrink: 0; padding: 0 clamp(24px, 4vw, 48px);
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.2rem, 3vw, 2rem);
-      color: rgba(232,224,212,0.12);
-      white-space: nowrap; font-weight: 700;
-      letter-spacing: 2px;
-    }
-    .marquee-item .dot {
-      display: inline-block; width: 6px; height: 6px;
-      background: rgba(201,169,110,0.3);
-      border-radius: 50%; vertical-align: middle;
-      margin: 0 clamp(16px, 3vw, 32px);
-    }
+    @keyframes marqueeScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    .marquee-item { flex-shrink: 0; padding: 0 clamp(24px,4vw,48px); font-family: 'Playfair Display', serif; font-size: clamp(1.2rem,3vw,2rem); color: rgba(232,224,212,0.12); white-space: nowrap; font-weight: 700; letter-spacing: 2px; }
+    .marquee-dot { display: inline-block; width: 6px; height: 6px; background: rgba(201,169,110,0.3); border-radius: 50%; vertical-align: middle; margin: 0 clamp(16px,3vw,32px); }
 
     /* ── Statement ── */
-    .statement {
-      padding: clamp(100px, 16vh, 200px) 48px;
-      text-align: center; position: relative;
-    }
-    .statement h2 {
-      font-size: clamp(2.2rem, 5.5vw, 4.5rem);
-      line-height: 1.15; max-width: 900px;
-      margin: 0 auto; font-weight: 700;
-    }
+    .statement { padding: clamp(100px,16vh,200px) 48px; text-align: center; }
+    .statement h2 { font-size: clamp(2.2rem,5.5vw,4.5rem); line-height: 1.15; max-width: 900px; margin: 0 auto; }
     .statement .accent { color: #c9a96e; }
-    .statement-line {
-      display: inline-block; overflow: hidden;
-      vertical-align: bottom;
-    }
-    .statement-line-inner {
-      display: inline-block; transform: translateY(110%);
-    }
+    .statement-line { display: inline-block; overflow: hidden; vertical-align: bottom; }
+    .statement-line-inner { display: inline-block; transform: translateY(110%); }
 
     /* ── Rings ── */
-    .rings-section {
-      padding: clamp(80px, 12vh, 160px) 0;
-      position: relative; overflow: hidden;
-    }
-    .rings-stage {
-      position: relative; width: 100%;
-      height: clamp(400px, 60vh, 600px);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .ring {
-      position: absolute; border-radius: 50%;
-      border: 1px solid rgba(201,169,110,0.1);
-    }
+    .rings-section { padding: clamp(80px,12vh,160px) 0; position: relative; overflow: hidden; }
+    .rings-stage { position: relative; width: 100%; height: clamp(400px,60vh,600px); display: flex; align-items: center; justify-content: center; }
+    .ring { position: absolute; border-radius: 50%; border: 1px solid rgba(201,169,110,0.1); }
     .ring-1 { width: 200px; height: 200px; animation: ringPulse 4s ease-in-out infinite; }
     .ring-2 { width: 350px; height: 350px; animation: ringPulse 4s 0.5s ease-in-out infinite; }
     .ring-3 { width: 500px; height: 500px; animation: ringPulse 4s 1s ease-in-out infinite; }
     .ring-4 { width: 650px; height: 650px; animation: ringPulse 4s 1.5s ease-in-out infinite; }
-    @keyframes ringPulse {
-      0%, 100% { transform: scale(1); opacity: 0.3; }
-      50% { transform: scale(1.08); opacity: 0.08; }
-    }
-    .rings-content {
-      position: relative; z-index: 2; text-align: center;
-      padding: 0 24px;
-    }
-    .rings-content h2 {
-      font-size: clamp(2rem, 5vw, 4rem);
-      line-height: 1.15; margin-bottom: 20px;
-    }
-    .rings-content p {
-      font-size: clamp(0.9rem, 1.8vw, 1.05rem);
-      color: rgba(232,224,212,0.5); font-weight: 300;
-      max-width: 500px; margin: 0 auto; line-height: 1.8;
-    }
+    @keyframes ringPulse { 0%,100%{transform:scale(1);opacity:0.3} 50%{transform:scale(1.08);opacity:0.08} }
+    .rings-content { position: relative; z-index: 2; text-align: center; padding: 0 24px; }
+    .rings-content h2 { font-size: clamp(2rem,5vw,4rem); line-height: 1.15; margin-bottom: 20px; }
+    .rings-content p { font-size: clamp(0.9rem,1.8vw,1.05rem); color: rgba(232,224,212,0.5); font-weight: 300; max-width: 500px; margin: 0 auto; line-height: 1.8; }
 
     /* ── Services ── */
-    .services {
-      padding: clamp(80px, 12vh, 160px) 48px;
-      position: relative;
-    }
-    .services-header {
-      display: flex; justify-content: space-between;
-      align-items: flex-end; margin-bottom: clamp(48px, 8vh, 80px);
-      flex-wrap: wrap; gap: 24px;
-    }
-    .services-header .eyebrow {
-      font-size: 0.65rem; letter-spacing: 4px;
-      text-transform: uppercase; color: #c9a96e;
-      margin-bottom: 12px;
-    }
-    .services-header h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
-    .services-header p {
-      color: rgba(232,224,212,0.4); font-weight: 300;
-      max-width: 360px; font-size: 0.9rem;
-    }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-      gap: 2px;
-    }
-    .service-card {
-      background: rgba(20,16,10,0.6);
-      padding: clamp(32px, 5vw, 48px);
-      position: relative; overflow: hidden;
-      transition: background 0.5s;
-      cursor: pointer;
-    }
-    .service-card::before {
-      content: ''; position: absolute; top: 0; left: 0;
-      width: 100%; height: 2px;
-      background: linear-gradient(90deg, transparent, #c9a96e, transparent);
-      transform: scaleX(0); transition: transform 0.6s;
-    }
+    .services { padding: clamp(80px,12vh,160px) 48px; }
+    .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: clamp(48px,8vh,80px); flex-wrap: wrap; gap: 24px; }
+    .eyebrow { font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: #c9a96e; margin-bottom: 12px; }
+    .services-header h2 { font-size: clamp(2rem,4vw,3.5rem); }
+    .services-header p { color: rgba(232,224,212,0.4); font-weight: 300; max-width: 360px; font-size: 0.9rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%,340px),1fr)); gap: 2px; }
+    .service-card { background: rgba(20,16,10,0.6); padding: clamp(32px,5vw,48px); position: relative; overflow: hidden; transition: background 0.5s; cursor: pointer; }
+    .service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg,transparent,#c9a96e,transparent); transform: scaleX(0); transition: transform 0.6s; }
     .service-card:hover::before { transform: scaleX(1); }
     .service-card:hover { background: rgba(30,24,14,0.8); }
-    .service-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 0.8rem; color: rgba(201,169,110,0.3);
-      margin-bottom: 24px; font-weight: 700;
-    }
-    .service-card h3 {
-      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-      margin-bottom: 12px; line-height: 1.2;
-    }
-    .service-card p {
-      color: rgba(232,224,212,0.45); font-weight: 300;
-      font-size: 0.9rem; line-height: 1.7; margin-bottom: 20px;
-    }
-    .service-card .price {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem; color: #c9a96e;
-    }
-    .service-card .price span {
-      font-size: 0.75rem; color: rgba(201,169,110,0.5);
-      font-family: 'Inter', sans-serif; font-weight: 300;
-    }
-    .service-card-arrow {
-      position: absolute; bottom: 32px; right: 32px;
-      width: 40px; height: 40px; border-radius: 50%;
-      border: 1px solid rgba(201,169,110,0.2);
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.4s; opacity: 0; transform: translateX(-10px);
-    }
-    .service-card:hover .service-card-arrow {
-      opacity: 1; transform: translateX(0);
-    }
-    .service-card-arrow svg { width: 14px; height: 14px; }
+    .service-number { font-family: 'Playfair Display', serif; font-size: 0.8rem; color: rgba(201,169,110,0.3); margin-bottom: 24px; font-weight: 700; }
+    .service-card h3 { font-size: clamp(1.3rem,2.5vw,1.8rem); margin-bottom: 12px; line-height: 1.2; }
+    .service-card p { color: rgba(232,224,212,0.45); font-weight: 300; font-size: 0.9rem; line-height: 1.7; margin-bottom: 20px; }
+    .service-price { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #c9a96e; }
+    .service-price span { font-size: 0.75rem; color: rgba(201,169,110,0.5); font-family: 'Inter', sans-serif; font-weight: 300; }
+    .service-card-arrow { position: absolute; bottom: 32px; right: 32px; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(201,169,110,0.2); display: flex; align-items: center; justify-content: center; transition: all 0.4s; opacity: 0; transform: translateX(-10px); }
+    .service-card:hover .service-card-arrow { opacity: 1; transform: translateX(0); }
 
-    /* ── Split Section ── */
-    .split {
-      display: grid; grid-template-columns: 1fr 1fr;
-      min-height: 80vh;
-    }
-    .split-image {
-      position: relative; overflow: hidden;
-    }
-    .split-image img {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: brightness(0.6) grayscale(0.3);
-      transition: transform 1.5s cubic-bezier(0.25,0.46,0.45,0.94);
-    }
+    /* ── Split ── */
+    .split { display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh; }
+    .split-image { position: relative; overflow: hidden; }
+    .split-image img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6) grayscale(0.3); transition: transform 1.5s cubic-bezier(0.25,0.46,0.45,0.94); }
     .split-image:hover img { transform: scale(1.05); }
-    .split-image::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(90deg, transparent 60%, #0a0a08 100%);
-    }
-    .split-text {
-      display: flex; flex-direction: column;
-      justify-content: center;
-      padding: clamp(40px, 8vw, 100px);
-      background: #0a0a08;
-    }
-    .split-text .eyebrow {
-      font-size: 0.65rem; letter-spacing: 4px;
-      text-transform: uppercase; color: #c9a96e;
-      margin-bottom: 20px;
-    }
-    .split-text h2 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      line-height: 1.15; margin-bottom: 24px;
-    }
-    .split-text p {
-      color: rgba(232,224,212,0.5); font-weight: 300;
-      line-height: 1.8; margin-bottom: 16px;
-    }
-    .split-text .stats-row {
-      display: flex; gap: 48px; margin-top: 32px;
-      padding-top: 32px; border-top: 1px solid rgba(201,169,110,0.08);
-    }
-    .split-text .stat .num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem; color: #c9a96e; font-weight: 700;
-    }
-    .split-text .stat .label {
-      font-size: 0.7rem; color: rgba(232,224,212,0.4);
-      letter-spacing: 2px; text-transform: uppercase;
-    }
+    .split-image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg,transparent 60%,#0a0a08 100%); }
+    .split-text { display: flex; flex-direction: column; justify-content: center; padding: clamp(40px,8vw,100px); background: #0a0a08; }
+    .split-text h2 { font-size: clamp(2rem,4vw,3.2rem); line-height: 1.15; margin-bottom: 24px; }
+    .split-text p { color: rgba(232,224,212,0.5); font-weight: 300; line-height: 1.8; margin-bottom: 16px; }
+    .stats-row { display: flex; gap: 48px; margin-top: 32px; padding-top: 32px; border-top: 1px solid rgba(201,169,110,0.08); }
+    .stat .num { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #c9a96e; font-weight: 700; }
+    .stat .label { font-size: 0.7rem; color: rgba(232,224,212,0.4); letter-spacing: 2px; text-transform: uppercase; }
 
-    /* ── Gallery Horizontal ── */
-    .gallery {
-      padding: clamp(80px, 12vh, 160px) 0;
-      overflow: hidden;
-    }
-    .gallery-header {
-      padding: 0 48px; margin-bottom: clamp(40px, 6vh, 60px);
-      display: flex; justify-content: space-between;
-      align-items: flex-end; flex-wrap: wrap; gap: 16px;
-    }
-    .gallery-header .eyebrow {
-      font-size: 0.65rem; letter-spacing: 4px;
-      text-transform: uppercase; color: #c9a96e;
-      margin-bottom: 12px;
-    }
-    .gallery-header h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
-    .gallery-track {
-      display: flex; gap: 16px;
-      padding: 0 48px;
-      width: max-content;
-    }
-    .gallery-item {
-      width: clamp(280px, 35vw, 450px);
-      flex-shrink: 0; position: relative;
-      overflow: hidden; border-radius: 4px;
-      cursor: pointer;
-    }
-    .gallery-item img {
-      width: 100%; height: clamp(300px, 40vw, 500px);
-      object-fit: cover;
-      filter: grayscale(0.6) brightness(0.7);
-      transition: all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);
-    }
-    .gallery-item:hover img {
-      filter: grayscale(0) brightness(1);
-      transform: scale(1.08);
-    }
-    .gallery-item::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(10,10,8,0.9) 0%, transparent 60%);
-      opacity: 0; transition: opacity 0.5s;
-    }
+    /* ── Gallery ── */
+    .gallery { padding: clamp(80px,12vh,160px) 0; overflow: hidden; }
+    .gallery-header { padding: 0 48px; margin-bottom: clamp(40px,6vh,60px); }
+    .gallery-track { display: flex; gap: 16px; padding: 0 48px; width: max-content; }
+    .gallery-item { width: clamp(280px,35vw,450px); flex-shrink: 0; position: relative; overflow: hidden; border-radius: 4px; cursor: pointer; }
+    .gallery-item img { width: 100%; height: clamp(300px,40vw,500px); object-fit: cover; filter: grayscale(0.6) brightness(0.7); transition: all 1.2s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .gallery-item:hover img { filter: grayscale(0) brightness(1); transform: scale(1.08); }
+    .gallery-item::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top,rgba(10,10,8,0.9) 0%,transparent 60%); opacity: 0; transition: opacity 0.5s; }
     .gallery-item:hover::after { opacity: 1; }
-    .gallery-item-info {
-      position: absolute; bottom: 20px; left: 20px; right: 20px;
-      z-index: 1; opacity: 0; transform: translateY(10px);
-      transition: all 0.5s;
-    }
-    .gallery-item:hover .gallery-item-info {
-      opacity: 1; transform: translateY(0);
-    }
+    .gallery-item-info { position: absolute; bottom: 20px; left: 20px; right: 20px; z-index: 1; opacity: 0; transform: translateY(10px); transition: all 0.5s; }
+    .gallery-item:hover .gallery-item-info { opacity: 1; transform: translateY(0); }
     .gallery-item-info h4 { font-size: 1rem; margin-bottom: 4px; }
-    .gallery-item-info p {
-      font-size: 0.75rem; color: rgba(232,224,212,0.5);
-      font-weight: 300;
-    }
+    .gallery-item-info p { font-size: 0.75rem; color: rgba(232,224,212,0.5); font-weight: 300; }
 
-    /* ── Toggle Section ── */
-    .toggle-section {
-      padding: clamp(80px, 14vh, 180px) 48px;
-      text-align: center; position: relative;
-      overflow: hidden;
-    }
-    .toggle-rings {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .toggle-ring {
-      position: absolute; border-radius: 50%;
-      border: 1px solid rgba(201,169,110,0.06);
-    }
+    /* ── Toggle ── */
+    .toggle-section { padding: clamp(80px,14vh,180px) 48px; text-align: center; position: relative; overflow: hidden; }
+    .toggle-rings { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .toggle-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(201,169,110,0.06); }
     .toggle-ring-1 { width: 300px; height: 300px; }
     .toggle-ring-2 { width: 500px; height: 500px; }
     .toggle-ring-3 { width: 700px; height: 700px; }
     .toggle-ring-4 { width: 900px; height: 900px; }
-    .toggle-content {
-      position: relative; z-index: 2;
-    }
-    .toggle-content .eyebrow {
-      font-size: 0.65rem; letter-spacing: 4px;
-      text-transform: uppercase; color: #c9a96e;
-      margin-bottom: 20px;
-    }
-    .toggle-content h2 {
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      line-height: 1.05; margin-bottom: 24px;
-    }
-    .toggle-content p {
-      font-size: 1rem; color: rgba(232,224,212,0.5);
-      font-weight: 300; max-width: 500px; margin: 0 auto;
-      line-height: 1.8;
-    }
+    .toggle-content { position: relative; z-index: 2; }
+    .toggle-content h2 { font-size: clamp(2.5rem,6vw,5rem); line-height: 1.05; margin-bottom: 24px; }
+    .toggle-content p { font-size: 1rem; color: rgba(232,224,212,0.5); font-weight: 300; max-width: 500px; margin: 0 auto; line-height: 1.8; }
 
     /* ── Contact ── */
-    .contact {
-      padding: clamp(80px, 12vh, 160px) 48px;
-      position: relative;
-    }
-    .contact-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: clamp(40px, 8vw, 100px);
-      align-items: start;
-    }
-    .contact-left .eyebrow {
-      font-size: 0.65rem; letter-spacing: 4px;
-      text-transform: uppercase; color: #c9a96e;
-      margin-bottom: 16px;
-    }
-    .contact-left h2 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      line-height: 1.15; margin-bottom: 24px;
-    }
+    .contact { padding: clamp(80px,12vh,160px) 48px; }
+    .contact-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,8vw,100px); align-items: start; }
+    .contact-left h2 { font-size: clamp(2rem,4vw,3.2rem); line-height: 1.15; margin-bottom: 24px; }
     .contact-left h2 .accent { color: #c9a96e; }
-    .contact-left > p {
-      color: rgba(232,224,212,0.5); font-weight: 300;
-      line-height: 1.8; margin-bottom: 40px;
-    }
+    .contact-left > p { color: rgba(232,224,212,0.5); font-weight: 300; line-height: 1.8; margin-bottom: 40px; }
     .contact-info-list { list-style: none; }
-    .contact-info-list li {
-      padding: 16px 0;
-      border-bottom: 1px solid rgba(201,169,110,0.06);
-      display: flex; justify-content: space-between;
-      align-items: center;
-    }
-    .contact-info-list .label {
-      font-size: 0.7rem; letter-spacing: 2px;
-      text-transform: uppercase; color: rgba(232,224,212,0.35);
-    }
+    .contact-info-list li { padding: 16px 0; border-bottom: 1px solid rgba(201,169,110,0.06); display: flex; justify-content: space-between; align-items: center; }
+    .contact-info-list .label { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(232,224,212,0.35); }
     .contact-info-list .value { font-weight: 300; }
     .contact-info-list a { color: #c9a96e; transition: color 0.3s; }
     .contact-info-list a:hover { color: #d4b87a; }
-    .contact-form-wrap {
-      background: rgba(20,16,10,0.4);
-      border: 1px solid rgba(201,169,110,0.06);
-      border-radius: 8px; padding: clamp(24px, 4vw, 40px);
-    }
-    .contact-form-wrap h3 {
-      font-size: 1.2rem; margin-bottom: 24px; color: #c9a96e;
-    }
+    .contact-form-wrap { background: rgba(20,16,10,0.4); border: 1px solid rgba(201,169,110,0.06); border-radius: 8px; padding: clamp(24px,4vw,40px); }
+    .contact-form-wrap h3 { font-size: 1.2rem; margin-bottom: 24px; color: #c9a96e; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .form-group { margin-bottom: 16px; }
-    .form-group label {
-      display: block; font-size: 0.65rem; letter-spacing: 2px;
-      text-transform: uppercase; color: rgba(232,224,212,0.35);
-      margin-bottom: 8px;
-    }
-    .form-group input, .form-group textarea {
-      width: 100%; padding: 14px 16px;
-      background: rgba(10,10,8,0.6);
-      border: 1px solid rgba(201,169,110,0.08);
-      border-radius: 6px; color: #e8e0d4;
-      font-family: 'Inter', sans-serif; font-size: 0.9rem;
-      font-weight: 300; outline: none; transition: all 0.3s;
-    }
-    .form-group input::placeholder, .form-group textarea::placeholder {
-      color: rgba(232,224,212,0.2);
-    }
-    .form-group input:focus, .form-group textarea:focus {
-      border-color: rgba(201,169,110,0.3);
-      box-shadow: 0 0 0 3px rgba(201,169,110,0.05);
-    }
+    .form-group label { display: block; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(232,224,212,0.35); margin-bottom: 8px; }
+    .form-group input, .form-group textarea { width: 100%; padding: 14px 16px; background: rgba(10,10,8,0.6); border: 1px solid rgba(201,169,110,0.08); border-radius: 6px; color: #e8e0d4; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 300; outline: none; transition: all 0.3s; }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(232,224,212,0.2); }
+    .form-group input:focus, .form-group textarea:focus { border-color: rgba(201,169,110,0.3); box-shadow: 0 0 0 3px rgba(201,169,110,0.05); }
     .form-group textarea { resize: vertical; min-height: 120px; }
-    .form-group.error input, .form-group.error textarea {
-      border-color: rgba(200,100,80,0.6);
-    }
-    .form-group .error-text {
-      font-size: 0.7rem; color: #c86450;
-      margin-top: 6px; display: none; font-weight: 300;
-    }
+    .form-group.error input, .form-group.error textarea { border-color: rgba(200,100,80,0.6); }
+    .form-group .error-text { font-size: 0.7rem; color: #c86450; margin-top: 6px; display: none; font-weight: 300; }
     .form-group.error .error-text { display: block; }
-    .form-submit {
-      width: 100%; padding: 16px;
-      background: #c9a96e; color: #0a0a08;
-      border: none; border-radius: 6px;
-      font-family: 'Inter', sans-serif; font-size: 0.8rem;
-      font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
-      cursor: pointer; transition: all 0.3s;
-    }
+    .form-submit { width: 100%; padding: 16px; background: #c9a96e; color: #0a0a08; border: none; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
     .form-submit:hover { background: #d4b87a; transform: translateY(-2px); }
     .form-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-    .form-status {
-      margin-top: 16px; padding: 12px 16px;
-      border-radius: 6px; font-size: 0.85rem;
-      font-weight: 300; display: none; text-align: center;
-    }
+    .form-status { margin-top: 16px; padding: 12px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: 300; display: none; text-align: center; }
     .form-status.success { display: block; background: rgba(100,180,120,0.1); border: 1px solid rgba(100,180,120,0.3); color: #64b478; }
-    .form-status.error { display: block; background: rgba(200,100,80,0.1); border: 1px solid rgba(200,100,80,0.3); color: #c86450; }
     .form-status.sending { display: block; background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.3); color: #c9a96e; }
 
     /* ── Footer ── */
-    footer {
-      border-top: 1px solid rgba(201,169,110,0.06);
-      padding: clamp(40px, 6vh, 60px) 48px;
-    }
-    .footer-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: 2fr 1fr 1fr;
-      gap: 48px;
-    }
-    .footer-brand {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem; color: #c9a96e;
-      letter-spacing: 3px; margin-bottom: 16px;
-    }
-    .footer-brand-desc {
-      color: rgba(232,224,212,0.35); font-weight: 300;
-      font-size: 0.85rem; max-width: 300px; line-height: 1.7;
-    }
-    .footer-col h4 {
-      font-size: 0.65rem; letter-spacing: 3px;
-      text-transform: uppercase; color: rgba(201,169,110,0.5);
-      margin-bottom: 20px; font-family: 'Inter', sans-serif;
-      font-weight: 500;
-    }
+    footer { border-top: 1px solid rgba(201,169,110,0.06); padding: clamp(40px,6vh,60px) 48px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; }
+    .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #c9a96e; letter-spacing: 3px; margin-bottom: 16px; }
+    .footer-brand-desc { color: rgba(232,224,212,0.35); font-weight: 300; font-size: 0.85rem; max-width: 300px; line-height: 1.7; }
+    .footer-col h4 { font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(201,169,110,0.5); margin-bottom: 20px; font-family: 'Inter', sans-serif; font-weight: 500; }
     .footer-col ul { list-style: none; }
     .footer-col li { margin-bottom: 10px; }
-    .footer-col a {
-      font-size: 0.85rem; color: rgba(232,224,212,0.45);
-      font-weight: 300; transition: color 0.3s;
-    }
+    .footer-col a { font-size: 0.85rem; color: rgba(232,224,212,0.45); font-weight: 300; transition: color 0.3s; }
     .footer-col a:hover { color: #c9a96e; }
-    .footer-bottom {
-      max-width: 1200px; margin: 32px auto 0;
-      padding-top: 24px;
-      border-top: 1px solid rgba(201,169,110,0.04);
-      display: flex; justify-content: space-between;
-      align-items: center; flex-wrap: wrap; gap: 16px;
-    }
-    .footer-bottom p {
-      font-size: 0.75rem; color: rgba(232,224,212,0.25);
-      font-weight: 300;
-    }
-    .footer-socials { display: flex; gap: 12px; }
-    .footer-socials a {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: rgba(201,169,110,0.06);
-      display: flex; align-items: center; justify-content: center;
-      color: rgba(201,169,110,0.5); transition: all 0.3s;
-    }
-    .footer-socials a:hover {
-      background: rgba(201,169,110,0.15); color: #c9a96e;
-      transform: translateY(-2px);
-    }
+    .footer-bottom { max-width: 1200px; margin: 32px auto 0; padding-top: 24px; border-top: 1px solid rgba(201,169,110,0.04); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-bottom p { font-size: 0.75rem; color: rgba(232,224,212,0.25); font-weight: 300; }
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
-      .nav { padding: 16px 24px; }
-      .nav-links { display: none; }
-      .hero { padding: 0 24px clamp(40px, 6vh, 80px); }
-      .services { padding: clamp(60px, 10vh, 120px) 24px; }
-      .split { grid-template-columns: 1fr; }
-      .split-image { height: 50vh; }
-      .split-image::after { background: linear-gradient(180deg, transparent 60%, #0a0a08 100%); }
-      .gallery-header, .services-header { padding: 0 24px; }
+      .nav { padding: 16px 24px; } .nav-links { display: none; }
+      .hero { padding: 0 24px clamp(40px,6vh,80px); }
+      .services, .contact { padding-left: 24px; padding-right: 24px; }
+      .split { grid-template-columns: 1fr; } .split-image { height: 50vh; }
+      .split-image::after { background: linear-gradient(180deg,transparent 60%,#0a0a08 100%); }
+      .gallery-header, .services-header { padding-left: 24px; padding-right: 24px; }
       .gallery-track { padding: 0 24px; }
-      .contact { padding: clamp(60px, 10vh, 120px) 24px; }
       .contact-inner { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
-      footer { padding: clamp(32px, 5vh, 48px) 24px; }
+      footer { padding-left: 24px; padding-right: 24px; }
       .footer-inner { grid-template-columns: 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; text-align: center; }
       .cursor { display: none; }
     }
     @media (max-width: 480px) {
-      .hero h1 { font-size: 2.5rem; }
-      .statement h2 { font-size: 2rem; }
-      .rings-content h2 { font-size: 2rem; }
-      .toggle-content h2 { font-size: 2.5rem; }
+      .hero h1 { font-size: 2.5rem; } .statement h2 { font-size: 2rem; }
+      .rings-content h2, .toggle-content h2 { font-size: 2rem; }
       .gallery-item { width: 260px; }
     }
     @media print {
-      .preloader, .nav, .cursor, .hero-video-wrap, .marquee-section,
-      .rings-section, .toggle-section, .gallery, .hero-scroll { display: none !important; }
+      .preloader, .nav, .cursor, .hero-video-wrap, .marquee-section, .rings-section, .toggle-section, .gallery, .hero-scroll { display: none !important; }
       body { background: #fff; color: #000; }
-      .reveal { opacity: 1 !important; transform: none !important; }
     }
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
       .marquee-track { animation: none; }
     }
+
+    /* ── React Component Styles ── */
+    .page-transition { animation: pageIn 0.6s cubic-bezier(0.16,1,0.3,1); }
+    @keyframes pageIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-enter { opacity: 0; }
+    .fade-enter-active { opacity: 1; transition: opacity 0.5s; }
+    .fade-exit { opacity: 1; }
+    .fade-exit-active { opacity: 0; transition: opacity 0.5s; }
   </style>
 </head>
 <body>
+<div id="root"></div>
 
-<!-- Preloader -->
-<div class="preloader" id="preloader">
-  <div class="preloader-logo" id="preloaderLogo">St.Athena</div>
-  <div class="preloader-bar-track"><div class="preloader-bar" id="preloaderBar"></div></div>
-  <div class="preloader-percent" id="preloaderPercent">0%</div>
-</div>
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback, createContext, useContext, memo, useMemo } = React;
 
-<!-- Custom Cursor -->
-<div class="cursor" id="cursor"></div>
+// ═══════════════════════════════════════════
+// CONTEXT — Global State (like Next.js Provider)
+// ═══════════════════════════════════════════
+const AppContext = createContext();
 
-<!-- Nav -->
-<nav class="nav">
-  <div class="nav-logo">St.Athena</div>
-  <ul class="nav-links">
-    <li><a href="#about">O nama</a></li>
-    <li><a href="#services">Usluge</a></li>
-    <li><a href="#gallery">Galerija</a></li>
-    <li><a href="#contact">Kontakt</a></li>
-  </ul>
-  <a href="tel:+3816xxxxxxx" class="nav-cta">Zakaži</a>
-</nav>
+function AppProvider({ children }) {
+  const [loaded, setLoaded] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
+  const [formErrors, setFormErrors] = useState({});
+  const [formStatus, setFormStatus] = useState(null);
 
-<!-- Hero -->
-<section class="hero">
-  <div class="hero-video-wrap">
-    <video autoplay muted loop playsinline preload="auto" poster="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1920&q=80">
-      <source src="https://cdn.coverr.co/videos/coverr-a-barber-cutting-a-mans-hair-2707/1080p.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="hero-content">
-    <div class="hero-tag" id="heroTag">Beograd · Slavija</div>
-    <h1 id="heroTitle">
-      <span class="hero-word"><span class="hero-word-inner">Mjesto</span></span>
-      <span class="hero-word"><span class="hero-word-inner">gdje</span></span>
-      <span class="hero-word"><span class="hero-word-inner accent">stil</span></span><br>
-      <span class="hero-word"><span class="hero-word-inner">dobija</span></span>
-      <span class="hero-word"><span class="hero-word-inner accent">svoju</span></span>
-      <span class="hero-word"><span class="hero-word-inner accent">priču</span></span>
-    </h1>
-    <p class="hero-sub" id="heroSub">Premium barbershop iskustvo u srcu Beograda. Klasična tradicija, savremeni pristup.</p>
-  </div>
-  <div class="hero-scroll">
-    <span class="hero-scroll-text">Scroll</span>
-    <div class="hero-scroll-line"></div>
-  </div>
-</section>
+  const value = useMemo(() => ({
+    loaded, setLoaded,
+    activeSection, setActiveSection,
+    formData, setFormData,
+    formErrors, setFormErrors,
+    formStatus, setFormStatus
+  }), [loaded, activeSection, formData, formErrors, formStatus]);
 
-<!-- Marquee -->
-<section class="marquee-section">
-  <div class="marquee-label">St.Athena · Premium Barbershop · Beograd</div>
-  <div class="marquee-track">
-    <div class="marquee-item">Šišanje <span class="dot"></span></div>
-    <div class="marquee-item">Brijanje <span class="dot"></span></div>
-    <div class="marquee-item">Brada <span class="dot"></span></div>
-    <div class="marquee-item">Styling <span class="dot"></span></div>
-    <div class="marquee-item">Facial <span class="dot"></span></div>
-    <div class="marquee-item">Farbanje <span class="dot"></span></div>
-    <div class="marquee-item">Šišanje <span class="dot"></span></div>
-    <div class="marquee-item">Brijanje <span class="dot"></span></div>
-    <div class="marquee-item">Brada <span class="dot"></span></div>
-    <div class="marquee-item">Styling <span class="dot"></span></div>
-    <div class="marquee-item">Facial <span class="dot"></span></div>
-    <div class="marquee-item">Farbanje <span class="dot"></span></div>
-  </div>
-</section>
-
-<!-- Statement -->
-<section class="statement">
-  <h2 id="statementTitle">
-    <span class="statement-line"><span class="statement-line-inner">Klasična</span></span>
-    <span class="statement-line"><span class="statement-line-inner accent">tradicija.</span></span><br>
-    <span class="statement-line"><span class="statement-line-inner">Savremeni</span></span>
-    <span class="statement-line"><span class="statement-line-inner">pristup.</span></span>
-  </h2>
-</section>
-
-<!-- Rings / Mission -->
-<section class="rings-section">
-  <div class="rings-stage">
-    <div class="ring ring-1"></div>
-    <div class="ring ring-2"></div>
-    <div class="ring ring-3"></div>
-    <div class="ring ring-4"></div>
-    <div class="rings-content reveal">
-      <h2>Svaki detalj<br><span style="color:#c9a96e;">je važan</span></h2>
-      <p>Od ulaska do izlaska — svaki trenutak je pažljivo osmišljen da vam pruži iskustvo koje ćete pamtiti.</p>
-    </div>
-  </div>
-</section>
-
-<!-- Services -->
-<section class="services" id="services">
-  <div class="services-header">
-    <div>
-      <div class="eyebrow reveal">Usluge</div>
-      <h2 class="reveal">Šta nudimo</h2>
-    </div>
-    <p class="reveal">Profesionalne usluge prilagođene vašem stilu i potrebama.</p>
-  </div>
-  <div class="services-grid">
-    <div class="service-card reveal">
-      <div class="service-number">01</div>
-      <h3>Šišanje muško</h3>
-      <p>Klasično i moderno šišanje prilagođeno vašem stilu, uz finalni styling</p>
-      <div class="price">1.500 <span>RSD</span></div>
-      <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-number">02</div>
-      <h3>Brijanje</h3>
-      <p>Tradicionalno brijanje vrućim peškirom i premium pjenom</p>
-      <div class="price">1.200 <span>RSD</span></div>
-      <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-number">03</div>
-      <h3>Brada trim</h3>
-      <p>Oblikovanje i doterivanje brade preciznim tehnikama</p>
-      <div class="price">800 <span>RSD</span></div>
-      <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-number">04</div>
-      <h3>Šišanje + brada</h3>
-      <p>Kompletno sređivanje u jednom terminu sa popustom</p>
-      <div class="price">2.000 <span>RSD</span></div>
-      <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-number">05</div>
-      <h3>Facial tretman</h3>
-      <p>Čišćenje lica, piling i hidratacija za svjež izgled</p>
-      <div class="price">1.500 <span>RSD</span></div>
-      <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-number">06</div>
-      <h3>Komplet paket</h3>
-      <p>Šišanje + brada + facial — sve u jednom terminu</p>
-      <div class="price">3.500 <span>RSD</span></div>
-      <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-    </div>
-  </div>
-</section>
-
-<!-- Split About -->
-<section class="split" id="about">
-  <div class="split-image">
-    <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=900&q=85" alt="Barber pri radu" loading="lazy">
-  </div>
-  <div class="split-text">
-    <div class="eyebrow reveal">O nama</div>
-    <h2 class="reveal">Više od salona —<br><span style="color:#c9a96e;">iskustvo</span></h2>
-    <p class="reveal">St.Athena je mjesto gdje se susreću klasična barber tradicija i savremeni urbani stil.</p>
-    <p class="reveal">Svaki dolazak je priča za sebe — pažljivo osmišljena od ulaska do izlaska.</p>
-    <div class="stats-row reveal">
-      <div class="stat">
-        <div class="num">7+</div>
-        <div class="label">Godina</div>
-      </div>
-      <div class="stat">
-        <div class="num">5k+</div>
-        <div class="label">Klijenata</div>
-      </div>
-      <div class="stat">
-        <div class="num">4.9</div>
-        <div class="label">Ocena</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Gallery Horizontal Scroll -->
-<section class="gallery" id="gallery">
-  <div class="gallery-header">
-    <div>
-      <div class="eyebrow reveal">Galerija</div>
-      <h2 class="reveal">Naš rad</h2>
-    </div>
-  </div>
-  <div class="gallery-track" id="galleryTrack">
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=500&q=80" alt="Klasično šišanje" loading="lazy">
-      <div class="gallery-item-info"><h4>Klasično šišanje</h4><p> Preciznost u svakom potezu</p></div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=500&q=80" alt="Moderni stil" loading="lazy">
-      <div class="gallery-item-info"><h4>Moderni stil</h4><p>Savremeni pristup</p></div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=500&q=80" alt="Brijanje" loading="lazy">
-      <div class="gallery-item-info"><h4>Tradicionalno brijanje</h4><p>Vrući peškir i pena</p></div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=500&q=80" alt="Enterijer" loading="lazy">
-      <div class="gallery-item-info"><h4>Naš enterijer</h4><p>Ambijent koji opušta</p></div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1675599193884-38c7a5ceecbc?w=500&q=80" alt="Barber u radu" loading="lazy">
-      <div class="gallery-item-info"><h4>Barber u radu</h4><p>Posvećenost detaljima</p></div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1582095133179-bfd08e2fc6b3?w=500&q=80" alt="Detalji" loading="lazy">
-      <div class="gallery-item-info"><h4>Detalji</h4><p>Pažljivo osmišljeno</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- Toggle / Shift Section -->
-<section class="toggle-section">
-  <div class="toggle-rings">
-    <div class="toggle-ring toggle-ring-1"></div>
-    <div class="toggle-ring toggle-ring-2"></div>
-    <div class="toggle-ring toggle-ring-3"></div>
-    <div class="toggle-ring toggle-ring-4"></div>
-  </div>
-  <div class="toggle-content">
-    <div class="eyebrow reveal">Promena</div>
-    <h2 class="reveal">Od običnog do<br><span style="color:#c9a96e;">izvanrednog</span></h2>
-    <p class="reveal">Ne šišamo samo kosu — transformišemo način na koji se osećate.</p>
-  </div>
-</section>
-
-<!-- Contact -->
-<section class="contact" id="contact">
-  <div class="contact-inner">
-    <div class="contact-left">
-      <div class="eyebrow reveal">Kontakt</div>
-      <h2 class="reveal">Javite nam se —<br><span class="accent">tu smo za vas</span></h2>
-      <p class="reveal">Bilo da želite da zakažete termin ili imate pitanje, slobodno nas kontaktirajte.</p>
-      <ul class="contact-info-list reveal">
-        <li>
-          <span class="label">Lokacija</span>
-          <span class="value">Slavija, Beograd</span>
-        </li>
-        <li>
-          <span class="label">Telefon</span>
-          <span class="value"><a href="tel:+3816xxxxxxx">+381 6x xxx xxxx</a></span>
-        </li>
-        <li>
-          <span class="label">Email</span>
-          <span class="value"><a href="mailto:info@stathena.rs">info@stathena.rs</a></span>
-        </li>
-        <li>
-          <span class="label">Instagram</span>
-          <span class="value"><a href="https://www.instagram.com/_st.athena_/" target="_blank" rel="noopener">@_st.athena_</a></span>
-        </li>
-        <li>
-          <span class="label">Radno vreme</span>
-          <span class="value">Pon-Sub 09-20</span>
-        </li>
-      </ul>
-    </div>
-    <div class="contact-form-wrap reveal">
-      <h3>Pošaljite poruku</h3>
-      <form id="contactForm" novalidate>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="formName">Ime *</label>
-            <input type="text" id="formName" name="name" required placeholder="Vaše ime">
-            <span class="error-text">Molimo unesite ime</span>
-          </div>
-          <div class="form-group">
-            <label for="formEmail">Email *</label>
-            <input type="email" id="formEmail" name="email" required placeholder="vas@email.com">
-            <span class="error-text">Molimo unesite ispravan email</span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="formPhone">Telefon</label>
-          <input type="tel" id="formPhone" name="phone" placeholder="+381 6x xxx xxxx">
-        </div>
-        <div class="form-group">
-          <label for="formMessage">Poruka *</label>
-          <textarea id="formMessage" name="message" rows="4" required placeholder="Vaša poruka..."></textarea>
-          <span class="error-text">Molimo unesite poruku</span>
-        </div>
-        <button type="submit" class="form-submit" id="formSubmitBtn">Pošalji poruku</button>
-        <div class="form-status" id="formStatus"></div>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer>
-  <div class="footer-inner">
-    <div>
-      <div class="footer-brand">St.Athena</div>
-      <p class="footer-brand-desc">Premium barbershop iskustvo u srcu Beograda. Klasična tradicija, savremeni pristup.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Navigacija</h4>
-      <ul>
-        <li><a href="#about">O nama</a></li>
-        <li><a href="#services">Usluge</a></li>
-        <li><a href="#gallery">Galerija</a></li>
-        <li><a href="#contact">Kontakt</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Kontakt</h4>
-      <ul>
-        <li><a href="tel:+3816xxxxxxx">+381 6x xxx xxxx</a></li>
-        <li><a href="mailto:info@stathena.rs">info@stathena.rs</a></li>
-        <li><a href="https://www.instagram.com/_st.athena_/" target="_blank" rel="noopener">Instagram</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>&copy; 2026 St.Athena — Beograd. Sva prava zadržana.</p>
-    <div class="footer-socials">
-      <a href="https://www.instagram.com/_st.athena_/" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-      </a>
-    </div>
-  </div>
-</footer>
-
-<script>
-document.documentElement.classList.add('has-reveal');
-
-// ── Preloader ──
-(function() {
-  const preloader = document.getElementById('preloader');
-  const bar = document.getElementById('preloaderBar');
-  const percent = document.getElementById('preloaderPercent');
-  const logo = document.getElementById('preloaderLogo');
-  let progress = 0;
-
-  gsap.to(logo, { opacity: 1, y: 0, duration: 0.8, delay: 0.2 });
-
-  const interval = setInterval(() => {
-    progress += Math.random() * 15 + 5;
-    if (progress > 100) progress = 100;
-    bar.style.width = progress + '%';
-    percent.textContent = Math.round(progress) + '%';
-    if (progress >= 100) {
-      clearInterval(interval);
-      setTimeout(() => {
-        gsap.to(preloader, {
-          yPercent: -100, duration: 1,
-          ease: 'power4.inOut',
-          onComplete: () => { preloader.classList.add('done'); preloader.style.display = 'none'; initAnimations(); }
-        });
-      }, 400);
-    }
-  }, 120);
-})();
-
-// ── Custom Cursor ──
-(function() {
-  const cursor = document.getElementById('cursor');
-  if (window.matchMedia('(hover: hover)').matches) {
-    let mx = 0, my = 0, cx = 0, cy = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-    (function loop() {
-      cx += (mx - cx) * 0.15;
-      cy += (my - cy) * 0.15;
-      cursor.style.left = cx + 'px';
-      cursor.style.top = cy + 'px';
-      requestAnimationFrame(loop);
-    })();
-    document.querySelectorAll('a, button, .service-card, .gallery-item').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-    });
-  } else {
-    cursor.style.display = 'none';
-  }
-})();
-
-// ── Animations ──
-function initAnimations() {
-  gsap.registerPlugin(ScrollTrigger);
-
-  // Hero word-by-word
-  gsap.to('.hero-word-inner', {
-    y: 0, duration: 1.2, stagger: 0.08,
-    ease: 'power4.out', delay: 0.3
-  });
-  gsap.to('#heroTag', { opacity: 1, duration: 1, delay: 1.2 });
-  gsap.to('#heroSub', { opacity: 1, duration: 1, delay: 1.5 });
-
-  // Statement word-by-word
-  ScrollTrigger.create({
-    trigger: '.statement',
-    start: 'top 80%',
-    onEnter: () => {
-      gsap.to('.statement-line-inner', {
-        y: 0, duration: 1, stagger: 0.06,
-        ease: 'power4.out'
-      });
-    },
-    once: true
-  });
-
-  // General reveals
-  document.querySelectorAll('.reveal').forEach(el => {
-    ScrollTrigger.create({
-      trigger: el,
-      start: 'top 88%',
-      onEnter: () => el.classList.add('is-visible'),
-      once: true
-    });
-  });
-
-  // Rings parallax
-  gsap.to('.ring-1', {
-    scrollTrigger: { trigger: '.rings-section', start: 'top bottom', end: 'bottom top', scrub: 1 },
-    scale: 1.3, opacity: 0
-  });
-  gsap.to('.ring-2', {
-    scrollTrigger: { trigger: '.rings-section', start: 'top bottom', end: 'bottom top', scrub: 1 },
-    scale: 1.2, opacity: 0
-  });
-  gsap.to('.ring-3', {
-    scrollTrigger: { trigger: '.rings-section', start: 'top bottom', end: 'bottom top', scrub: 1 },
-    scale: 1.15, opacity: 0
-  });
-
-  // Gallery horizontal scroll
-  const galleryTrack = document.getElementById('galleryTrack');
-  if (galleryTrack) {
-    const totalScroll = galleryTrack.scrollWidth - window.innerWidth;
-    gsap.to(galleryTrack, {
-      x: -totalScroll,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.gallery',
-        start: 'top top',
-        end: () => '+=' + totalScroll,
-        scrub: 1,
-        pin: true,
-        anticipatePin: 1
-      }
-    });
-  }
-
-  // Service cards stagger
-  gsap.utils.toArray('.service-card').forEach((card, i) => {
-    gsap.from(card, {
-      scrollTrigger: { trigger: card, start: 'top 90%', once: true },
-      opacity: 0, y: 40, duration: 0.8,
-      delay: (i % 3) * 0.12,
-      ease: 'power3.out'
-    });
-  });
-
-  // Split image parallax
-  gsap.to('.split-image img', {
-    yPercent: 15,
-    scrollTrigger: { trigger: '.split', start: 'top bottom', end: 'bottom top', scrub: 1 }
-  });
-
-  // Toggle rings rotation
-  gsap.to('.toggle-ring-1', {
-    rotation: 360, repeat: -1, duration: 20, ease: 'none'
-  });
-  gsap.to('.toggle-ring-2', {
-    rotation: -360, repeat: -1, duration: 30, ease: 'none'
-  });
-  gsap.to('.toggle-ring-3', {
-    rotation: 360, repeat: -1, duration: 40, ease: 'none'
-  });
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
 
-// ── Form ──
-(function() {
-  const form = document.getElementById('contactForm');
-  if (!form) return;
-  const status = document.getElementById('formStatus');
-  const btn = document.getElementById('formSubmitBtn');
+function useApp() { return useContext(AppContext); }
 
-  function showError(id) {
-    const g = document.getElementById(id).closest('.form-group');
-    if (g) g.classList.add('error');
-  }
-  function clearErrors() {
-    document.querySelectorAll('.form-group.error').forEach(el => el.classList.remove('error'));
-  }
+// ═══════════════════════════════════════════
+// HOOKS — Custom React Hooks
+// ═══════════════════════════════════════════
+function useIntersectionReveal(threshold = 0.15) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); obs.unobserve(el); } }, { threshold });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return [ref, visible];
+}
 
-  form.addEventListener('submit', async e => {
+function useGSAPReveal() {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!ref.current || typeof gsap === 'undefined') return;
+    const el = ref.current;
+    gsap.from(el, {
+      scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+      opacity: 0, y: 40, duration: 0.8, ease: 'power3.out'
+    });
+  }, []);
+  return ref;
+}
+
+function useMousePosition() {
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+  useEffect(() => {
+    if (!window.matchMedia('(hover: hover)').matches) return;
+    let mx = 0, my = 0, cx = 0, cy = 0;
+    const onMove = e => { mx = e.clientX; my = e.clientY; };
+    document.addEventListener('mousemove', onMove);
+    let raf;
+    const loop = () => {
+      cx += (mx - cx) * 0.15; cy += (my - cy) * 0.15;
+      setPos({ x: cx, y: cy });
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+    return () => { document.removeEventListener('mousemove', onMove); cancelAnimationFrame(raf); };
+  }, []);
+  return pos;
+}
+
+// ═══════════════════════════════════════════
+// DATA — Services, Gallery, Marquee (like Next.js getStaticProps)
+// ═══════════════════════════════════════════
+const SERVICES = [
+  { id: 1, title: 'Šišanje muško', desc: 'Klasično i moderno šišanje prilagođeno vašem stilu, uz finalni styling', price: '1.500' },
+  { id: 2, title: 'Brijanje', desc: 'Tradicionalno brijanje vrućim peškirom i premium pjenom', price: '1.200' },
+  { id: 3, title: 'Brada trim', desc: 'Oblikovanje i doterivanje brade preciznim tehnikama', price: '800' },
+  { id: 4, title: 'Šišanje + brada', desc: 'Kompletno sređivanje u jednom terminu sa popustom', price: '2.000' },
+  { id: 5, title: 'Facial tretman', desc: 'Čišćenje lica, piling i hidratacija za svjež izgled', price: '1.500' },
+  { id: 6, title: 'Komplet paket', desc: 'Šišanje + brada + facial — sve u jednom terminu', price: '3.500' },
+];
+
+const GALLERY = [
+  { src: 'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=500&q=80', title: 'Klasično šišanje', sub: 'Preciznost u svakom potezu' },
+  { src: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=500&q=80', title: 'Moderni stil', sub: 'Savremeni pristup' },
+  { src: 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=500&q=80', title: 'Tradicionalno brijanje', sub: 'Vrući peškir i pena' },
+  { src: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=500&q=80', title: 'Naš enterijer', sub: 'Ambijent koji opušta' },
+  { src: 'https://images.unsplash.com/photo-1675599193884-38c7a5ceecbc?w=500&q=80', title: 'Barber u radu', sub: 'Posvećenost detaljima' },
+  { src: 'https://images.unsplash.com/photo-1582095133179-bfd08e2fc6b3?w=500&q=80', title: 'Detalji', sub: 'Pažljivo osmišljeno' },
+];
+
+const MARQUEE_ITEMS = ['Šišanje', 'Brijanje', 'Brada', 'Styling', 'Facial', 'Farbanje'];
+
+// ═══════════════════════════════════════════
+// COMPONENTS — Each is a React component (like Next.js page components)
+// ═══════════════════════════════════════════
+
+// ── Preloader ──
+const Preloader = memo(function Preloader() {
+  const { loaded, setLoaded } = useApp();
+  const [progress, setProgress] = useState(0);
+  const barRef = useRef(null);
+
+  useEffect(() => {
+    let p = 0;
+    const iv = setInterval(() => {
+      p += Math.random() * 15 + 5;
+      if (p > 100) p = 100;
+      setProgress(Math.round(p));
+      if (barRef.current) barRef.current.style.width = p + '%';
+      if (p >= 100) {
+        clearInterval(iv);
+        setTimeout(() => {
+          gsap.to('#preloaderEl', {
+            yPercent: -100, duration: 1, ease: 'power4.inOut',
+            onComplete: () => setLoaded(true)
+          });
+        }, 400);
+      }
+    }, 120);
+    return () => clearInterval(iv);
+  }, []);
+
+  if (loaded) return null;
+  return (
+    <div className="preloader" id="preloaderEl">
+      <div className="preloader-logo">St.Athena</div>
+      <div className="preloader-bar-track"><div className="preloader-bar" ref={barRef}></div></div>
+      <div className="preloader-percent">{progress}%</div>
+    </div>
+  );
+});
+
+// ── Custom Cursor ──
+const Cursor = memo(function Cursor() {
+  const pos = useMousePosition();
+  const [hover, setHover] = useState(false);
+
+  useEffect(() => {
+    const addHover = () => setHover(true);
+    const removeHover = () => setHover(false);
+    const els = document.querySelectorAll('a, button, .service-card, .gallery-item');
+    els.forEach(el => { el.addEventListener('mouseenter', addHover); el.addEventListener('mouseleave', removeHover); });
+    return () => els.forEach(el => { el.removeEventListener('mouseenter', addHover); el.removeEventListener('mouseleave', removeHover); };
+  });
+
+  if (!window.matchMedia('(hover: hover)').matches) return null;
+  return <div className={`cursor ${hover ? 'hover' : ''}`} style={{ left: pos.x + 'px', top: pos.y + 'px' }} />;
+});
+
+// ── Nav ──
+const Nav = memo(function Nav() {
+  const links = [
+    { href: '#about', label: 'O nama' },
+    { href: '#services', label: 'Usluge' },
+    { href: '#gallery', label: 'Galerija' },
+    { href: '#contact', label: 'Kontakt' },
+  ];
+  return (
+    <nav className="nav">
+      <div className="nav-logo">St.Athena</div>
+      <ul className="nav-links">
+        {links.map(l => <li key={l.href}><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+      <a href="tel:+3816xxxxxxx" className="nav-cta">Zakaži</a>
+    </nav>
+  );
+});
+
+// ── Hero ──
+function Hero() {
+  const words = [
+    ['Mjesto', false], ['gdje', false], ['stil', true],
+    ['dobija', false], ['svoju', true], ['priču', true]
+  ];
+  useEffect(() => {
+    gsap.to('.hero-word-inner', { y: 0, duration: 1.2, stagger: 0.08, ease: 'power4.out', delay: 0.3 });
+    gsap.to('.hero-tag', { opacity: 1, duration: 1, delay: 1.2 });
+    gsap.to('.hero-sub', { opacity: 1, duration: 1, delay: 1.5 });
+  }, []);
+
+  return (
+    <section className="hero">
+      <div className="hero-video-wrap">
+        <video autoPlay muted loop playsInline preload="auto" poster="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1920&q=80">
+          <source src="https://cdn.coverr.co/videos/coverr-a-barber-cutting-a-mans-hair-2707/1080p.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div className="hero-content">
+        <div className="hero-tag" style={{opacity:0}}>Beograd · Slavija</div>
+        <h1>
+          {words.map(([w, accent], i) => (
+            <span className="hero-word" key={i}>
+              <span className={`hero-word-inner ${accent ? 'accent' : ''}`}>{w}</span>
+            </span>
+          )).reduce((prev, curr, i) => {
+            if (i === 3) return [prev, <br key="br" />, curr];
+            return [...prev, ' ', curr];
+          }, [])}
+        </h1>
+        <p className="hero-sub" style={{opacity:0}}>Premium barbershop iskustvo u srcu Beograda. Klasična tradicija, savremeni pristup.</p>
+      </div>
+      <div className="hero-scroll">
+        <span className="hero-scroll-text">Scroll</span>
+        <div className="hero-scroll-line"></div>
+      </div>
+    </section>
+  );
+}
+
+// ── Marquee ──
+const Marquee = memo(function Marquee() {
+  const items = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
+  return (
+    <section className="marquee-section">
+      <div className="marquee-label">St.Athena · Premium Barbershop · Beograd</div>
+      <div className="marquee-track">
+        {items.map((item, i) => (
+          <span className="marquee-item" key={i}>
+            {item}<span className="marquee-dot"></span>
+          </span>
+        ))}
+      </div>
+    </section>
+  );
+});
+
+// ── Statement ──
+function Statement() {
+  const ref = useGSAPReveal();
+  useEffect(() => {
+    gsap.to('.statement-line-inner', {
+      scrollTrigger: { trigger: '.statement', start: 'top 80%', once: true },
+      y: 0, duration: 1, stagger: 0.06, ease: 'power4.out'
+    });
+  }, []);
+
+  return (
+    <section className="statement" ref={ref}>
+      <h2>
+        <span className="statement-line"><span className="statement-line-inner">Klasična</span></span>{' '}
+        <span className="statement-line"><span className="statement-line-inner accent">tradicija.</span></span><br/>
+        <span className="statement-line"><span className="statement-line-inner">Savremeni</span></span>{' '}
+        <span className="statement-line"><span className="statement-line-inner">pristup.</span></span>
+      </h2>
+    </section>
+  );
+}
+
+// ── Rings ──
+function Rings() {
+  const ref = useGSAPReveal();
+  useEffect(() => {
+    gsap.to('.ring-1', { scrollTrigger: { trigger: '.rings-section', start: 'top bottom', end: 'bottom top', scrub: 1 }, scale: 1.3, opacity: 0 });
+    gsap.to('.ring-2', { scrollTrigger: { trigger: '.rings-section', start: 'top bottom', end: 'bottom top', scrub: 1 }, scale: 1.2, opacity: 0 });
+    gsap.to('.ring-3', { scrollTrigger: { trigger: '.rings-section', start: 'top bottom', end: 'bottom top', scrub: 1 }, scale: 1.15, opacity: 0 });
+  }, []);
+
+  return (
+    <section className="rings-section">
+      <div className="rings-stage">
+        <div className="ring ring-1"></div>
+        <div className="ring ring-2"></div>
+        <div className="ring ring-3"></div>
+        <div className="ring ring-4"></div>
+        <div className="rings-content" ref={ref}>
+          <h2>Svaki detalj<br/><span style={{color:'#c9a96e'}}>je važan</span></h2>
+          <p>Od ulaska do izlaska — svaki trenutak je pažljivo osmišljen da vam pruži iskustvo koje ćete pamtiti.</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── Service Card (React Component) ──
+const ServiceCard = memo(function ServiceCard({ service, index }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!ref.current) return;
+    gsap.from(ref.current, {
+      scrollTrigger: { trigger: ref.current, start: 'top 90%', once: true },
+      opacity: 0, y: 40, duration: 0.8, delay: (index % 3) * 0.12, ease: 'power3.out'
+    });
+  }, []);
+
+  return (
+    <div className="service-card" ref={ref}>
+      <div className="service-number">{String(service.id).padStart(2, '0')}</div>
+      <h3>{service.title}</h3>
+      <p>{service.desc}</p>
+      <div className="service-price">{service.price} <span>RSD</span></div>
+      <div className="service-card-arrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" strokeWidth="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </div>
+    </div>
+  );
+});
+
+// ── Services Section ──
+function ServicesSection() {
+  return (
+    <section className="services" id="services">
+      <div className="services-header">
+        <div>
+          <div className="eyebrow">Usluge</div>
+          <h2>Šta nudimo</h2>
+        </div>
+        <p>Profesionalne usluge prilagođene vašem stilu i potrebama.</p>
+      </div>
+      <div className="services-grid">
+        {SERVICES.map((s, i) => <ServiceCard key={s.id} service={s} index={i} />)}
+      </div>
+    </section>
+  );
+}
+
+// ── Split About ──
+function SplitAbout() {
+  const ref = useGSAPReveal();
+  useEffect(() => {
+    gsap.to('.split-image img', {
+      yPercent: 15,
+      scrollTrigger: { trigger: '.split', start: 'top bottom', end: 'bottom top', scrub: 1 }
+    });
+  }, []);
+
+  return (
+    <section className="split" id="about">
+      <div className="split-image">
+        <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=900&q=85" alt="Barber pri radu" loading="lazy" />
+      </div>
+      <div className="split-text" ref={ref}>
+        <div className="eyebrow">O nama</div>
+        <h2>Više od salona —<br/><span style={{color:'#c9a96e'}}>iskustvo</span></h2>
+        <p>St.Athena je mjesto gdje se susreću klasična barber tradicija i savremeni urbani stil.</p>
+        <p>Svaki dolazak je priča za sebe — pažljivo osmišljena od ulaska do izlaska.</p>
+        <div className="stats-row">
+          <div className="stat"><div className="num">7+</div><div className="label">Godina</div></div>
+          <div className="stat"><div className="num">5k+</div><div className="label">Klijenata</div></div>
+          <div className="stat"><div className="num">4.9</div><div className="label">Ocena</div></div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── Gallery ──
+function Gallery() {
+  useEffect(() => {
+    const track = document.getElementById('galleryTrack');
+    if (!track) return;
+    gsap.to(track, {
+      x: -(track.scrollWidth - window.innerWidth),
+      ease: 'none',
+      scrollTrigger: { trigger: '.gallery', start: 'top top', end: () => '+=' + (track.scrollWidth - window.innerWidth), scrub: 1, pin: true, anticipatePin: 1 }
+    });
+  }, []);
+
+  return (
+    <section className="gallery" id="gallery">
+      <div className="gallery-header">
+        <div className="eyebrow">Galerija</div>
+        <h2>Naš rad</h2>
+      </div>
+      <div className="gallery-track" id="galleryTrack">
+        {GALLERY.map((g, i) => (
+          <div className="gallery-item" key={i}>
+            <img src={g.src} alt={g.title} loading="lazy" />
+            <div className="gallery-item-info"><h4>{g.title}</h4><p>{g.sub}</p></div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ── Toggle Section ──
+function ToggleSection() {
+  useEffect(() => {
+    gsap.to('.toggle-ring-1', { rotation: 360, repeat: -1, duration: 20, ease: 'none' });
+    gsap.to('.toggle-ring-2', { rotation: -360, repeat: -1, duration: 30, ease: 'none' });
+    gsap.to('.toggle-ring-3', { rotation: 360, repeat: -1, duration: 40, ease: 'none' });
+  }, []);
+
+  return (
+    <section className="toggle-section">
+      <div className="toggle-rings">
+        <div className="toggle-ring toggle-ring-1"></div>
+        <div className="toggle-ring toggle-ring-2"></div>
+        <div className="toggle-ring toggle-ring-3"></div>
+        <div className="toggle-ring toggle-ring-4"></div>
+      </div>
+      <div className="toggle-content">
+        <div className="eyebrow">Promena</div>
+        <h2>Od običnog do<br/><span style={{color:'#c9a96e'}}>izvanrednog</span></h2>
+        <p>Ne šišamo samo kosu — transformišemo način na koji se osećate.</p>
+      </div>
+    </section>
+  );
+}
+
+// ── Contact Form (React State Management) ──
+function ContactForm() {
+  const { formData, setFormData, formErrors, setFormErrors, formStatus, setFormStatus } = useApp();
+  const [sending, setSending] = useState(false);
+
+  const handleChange = (field) => (e) => {
+    setFormData(prev => ({ ...prev, [field]: e.target.value }));
+    if (formErrors[field]) setFormErrors(prev => ({ ...prev, [field]: null }));
+  };
+
+  const validate = useCallback(() => {
+    const errors = {};
+    if (!formData.name || formData.name.trim().length < 2) errors.name = true;
+    if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) errors.email = true;
+    if (!formData.message || formData.message.trim().length < 5) errors.message = true;
+    return errors;
+  }, [formData]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    clearErrors();
-    status.className = 'form-status'; status.style.display = 'none';
+    const errors = validate();
+    if (Object.keys(errors).length > 0) { setFormErrors(errors); return; }
 
-    const name = document.getElementById('formName').value.trim();
-    const email = document.getElementById('formEmail').value.trim();
-    const phone = document.getElementById('formPhone').value.trim();
-    const message = document.getElementById('formMessage').value.trim();
-
-    let ok = true;
-    ok &= name.length >= 2 ? true : (showError('formName'), false);
-    ok &= /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? true : (showError('formEmail'), false);
-    ok &= message.length >= 5 ? true : (showError('formMessage'), false);
-    if (!ok) return;
-
-    btn.disabled = true; btn.textContent = 'Slanje...';
-    status.textContent = 'Slanje poruke...';
-    status.className = 'form-status sending'; status.style.display = 'block';
-
+    setSending(true);
+    setFormStatus('sending');
     try {
       await fetch('https://formsubmit.co/ajax/jenic.daki@gmail.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ name, email, phone, message, _subject: 'Poruka sa St.Athena sajta' })
+        body: JSON.stringify({ ...formData, _subject: 'Poruka sa St.Athena sajta' })
       });
     } catch {}
+    setFormStatus('success');
+    setFormData({ name: '', email: '', phone: '', message: '' });
+    setSending(false);
+  };
 
-    status.textContent = 'Hvala! Poruka je poslata.';
-    status.className = 'form-status success'; status.style.display = 'block';
-    form.reset(); btn.textContent = 'Pošalji poruku'; btn.disabled = false;
-  });
+  return (
+    <div className="contact-form-wrap">
+      <h3>Pošaljite poruku</h3>
+      <form onSubmit={handleSubmit} noValidate>
+        <div className="form-row">
+          <div className={`form-group ${formErrors.name ? 'error' : ''}`}>
+            <label>Ime *</label>
+            <input type="text" value={formData.name} onChange={handleChange('name')} placeholder="Vaše ime" />
+            <span className="error-text">Molimo unesite ime</span>
+          </div>
+          <div className={`form-group ${formErrors.email ? 'error' : ''}`}>
+            <label>Email *</label>
+            <input type="email" value={formData.email} onChange={handleChange('email')} placeholder="vas@email.com" />
+            <span className="error-text">Molimo unesite ispravan email</span>
+          </div>
+        </div>
+        <div className="form-group">
+          <label>Telefon</label>
+          <input type="tel" value={formData.phone} onChange={handleChange('phone')} placeholder="+381 6x xxx xxxx" />
+        </div>
+        <div className={`form-group ${formErrors.message ? 'error' : ''}`}>
+          <label>Poruka *</label>
+          <textarea rows="4" value={formData.message} onChange={handleChange('message')} placeholder="Vaša poruka..."></textarea>
+          <span className="error-text">Molimo unesite poruku</span>
+        </div>
+        <button type="submit" className="form-submit" disabled={sending}>
+          {sending ? 'Slanje...' : 'Pošalji poruku'}
+        </button>
+        {formStatus === 'sending' && <div className="form-status sending">Slanje poruke...</div>}
+        {formStatus === 'success' && <div className="form-status success">Hvala! Poruka je poslata.</div>}
+      </form>
+    </div>
+  );
+}
 
-  document.querySelectorAll('.form-group input, .form-group textarea').forEach(f => {
-    f.addEventListener('input', () => f.closest('.form-group')?.classList.remove('error'));
-  });
-})();
+// ── Contact Section ──
+function ContactSection() {
+  return (
+    <section className="contact" id="contact">
+      <div className="contact-inner">
+        <div className="contact-left">
+          <div className="eyebrow">Kontakt</div>
+          <h2>Javite nam se —<br/><span className="accent">tu smo za vas</span></h2>
+          <p>Bilo da želite da zakažete termin ili imate pitanje, slobodno nas kontaktirajte.</p>
+          <ul className="contact-info-list">
+            <li><span className="label">Lokacija</span><span className="value">Slavija, Beograd</span></li>
+            <li><span className="label">Telefon</span><span className="value"><a href="tel:+3816xxxxxxx">+381 6x xxx xxxx</a></span></li>
+            <li><span className="label">Email</span><span className="value"><a href="mailto:info@stathena.rs">info@stathena.rs</a></span></li>
+            <li><span className="label">Instagram</span><span className="value"><a href="https://www.instagram.com/_st.athena_/" target="_blank" rel="noopener">@_st.athena_</a></span></li>
+            <li><span className="label">Radno vreme</span><span className="value">Pon-Sub 09-20</span></li>
+          </ul>
+        </div>
+        <ContactForm />
+      </div>
+    </section>
+  );
+}
 
-// ── Smooth anchor scroll ──
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    const t = document.querySelector(a.getAttribute('href'));
-    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
+// ── Footer ──
+const Footer = memo(function Footer() {
+  return (
+    <footer>
+      <div className="footer-inner">
+        <div>
+          <div className="footer-brand">St.Athena</div>
+          <p className="footer-brand-desc">Premium barbershop iskustvo u srcu Beograda. Klasična tradicija, savremeni pristup.</p>
+        </div>
+        <div className="footer-col">
+          <h4>Navigacija</h4>
+          <ul>
+            <li><a href="#about">O nama</a></li>
+            <li><a href="#services">Usluge</a></li>
+            <li><a href="#gallery">Galerija</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+          </ul>
+        </div>
+        <div className="footer-col">
+          <h4>Kontakt</h4>
+          <ul>
+            <li><a href="tel:+3816xxxxxxx">+381 6x xxx xxxx</a></li>
+            <li><a href="mailto:info@stathena.rs">info@stathena.rs</a></li>
+            <li><a href="https://www.instagram.com/_st.athena_/" target="_blank" rel="noopener">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+      <div className="footer-bottom">
+        <p>&copy; 2026 St.Athena — Beograd. Sva prava zadržana.</p>
+      </div>
+    </footer>
+  );
 });
+
+// ═══════════════════════════════════════════
+// APP — Root Component (like Next.js _app.js)
+// ═══════════════════════════════════════════
+function App() {
+  return (
+    <AppProvider>
+      <Preloader />
+      <Cursor />
+      <Nav />
+      <Hero />
+      <Marquee />
+      <Statement />
+      <Rings />
+      <ServicesSection />
+      <SplitAbout />
+      <Gallery />
+      <ToggleSection />
+      <ContactSection />
+      <Footer />
+    </AppProvider>
+  );
+}
+
+// ═══════════════════════════════════════════
+// RENDER — Mount React (like Next.js entry)
+// ═══════════════════════════════════════════
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
 </script>
 </body>
 </html>
