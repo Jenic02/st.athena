@@ -4,389 +4,454 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>St.Athena — Premium Barbershop Beograd</title>
-  <meta name="description" content="St.Athena — Premium barbershop u Beogradu na Slaviji. Profesionalno šišanje, brijanje, oblikovanje brade i barber usluge po meri. Zakažite termin već danas!">
-  <meta name="keywords" content="barber, barbershop, Beograd, šišanje, brijanje, muški frizer, brada, st athena, muško šišanje, slavija, frizerski salon beograd">
+  <meta name="description" content="St.Athena — Premium barbershop u Beogradu na Slaviji. Profesionalno šišanje, brijanje, oblikovanje brade. Zakažite termin već danas!">
+  <meta name="keywords" content="barber, barbershop, Beograd, šišanje, brijanje, st athena, slavija">
   <meta name="author" content="St.Athena">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#0d0a06">
+  <meta name="theme-color" content="#0a0a08">
   <meta property="og:title" content="St.Athena — Premium Barbershop Beograd">
   <meta property="og:description" content="Profesionalno šišanje, brijanje i barber usluge na Slaviji u Beogradu.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://stathena.rs">
   <meta property="og:image" content="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1200&q=80">
   <meta property="og:locale" content="sr_RS">
-  <meta property="og:site_name" content="St.Athena Barbershop">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="St.Athena — Premium Barbershop Beograd">
-  <meta name="twitter:description" content="Profesionalno šišanje, brijanje i barber usluge na Slaviji u Beogradu.">
-  <meta name="twitter:image" content="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1200&q=80">
   <link rel="canonical" href="https://stathena.rs">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✂</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Barbershop",
     "name": "St.Athena",
-    "description": "Premium barbershop na Slaviji u Beogradu — muško šišanje, brijanje, oblikovanje brade i facial tretmani.",
+    "description": "Premium barbershop na Slaviji u Beogradu.",
     "url": "https://stathena.rs",
     "telephone": "+3816xxxxxxx",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Slavija",
-      "addressLocality": "Beograd",
-      "addressCountry": "RS"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 44.8048,
-      "longitude": 20.4646
-    },
+    "address": {"@type": "PostalAddress","streetAddress": "Slavija","addressLocality": "Beograd","addressCountry": "RS"},
+    "geo": {"@type": "GeoCoordinates","latitude": 44.8048,"longitude": 20.4646},
     "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-        "opens": "09:00",
-        "closes": "20:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Saturday",
-        "opens": "09:00",
-        "closes": "17:00"
-      }
+      {"@type": "OpeningHoursSpecification","dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens": "09:00","closes": "20:00"},
+      {"@type": "OpeningHoursSpecification","dayOfWeek": "Saturday","opens": "09:00","closes": "17:00"}
     ],
     "priceRange": "$$",
-    "image": "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1200&q=80",
     "sameAs": ["https://www.instagram.com/_st.athena_/"]
   }
   </script>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    html { scroll-behavior: smooth; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { background: #0a0a08; }
+    html.has-reveal .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    html.has-reveal .reveal.is-visible { opacity: 1; transform: translateY(0); }
     body {
-      font-family: 'Inter', sans-serif;
-      background: #0d0a06;
-      color: #e8d5b5;
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #0a0a08;
+      color: #e8e0d4;
       line-height: 1.6;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
-    h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 700; }
-    img { max-width: 100%; height: auto; display: block; }
+    h1,h2,h3,h4 { font-family: 'Playfair Display', serif; font-weight: 700; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
 
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes slideRight { from { transform: translateX(-100%); } to { transform: translateX(0); } }
-    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-
-    .reveal {
-      opacity: 0; transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    /* ── Preloader ── */
+    .preloader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #0a0a08;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 24px;
     }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
+    .preloader-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: #c9a96e; letter-spacing: 4px;
+      opacity: 0; transform: translateY(20px);
+    }
+    .preloader-bar-track {
+      width: 200px; height: 2px;
+      background: rgba(201,169,110,0.15);
+      border-radius: 2px; overflow: hidden;
+    }
+    .preloader-bar {
+      width: 0%; height: 100%;
+      background: #c9a96e; border-radius: 2px;
+    }
+    .preloader-percent {
+      font-size: 0.75rem; color: rgba(201,169,110,0.5);
+      letter-spacing: 4px; font-weight: 300;
+    }
+    .preloader.done { pointer-events: none; }
+
+    /* ── Custom Cursor ── */
+    .cursor {
+      width: 20px; height: 20px;
+      border: 1.5px solid rgba(201,169,110,0.6);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s, height 0.3s, border-color 0.3s;
+      mix-blend-mode: difference;
+    }
+    .cursor.hover { width: 50px; height: 50px; border-color: #c9a96e; }
 
     /* ── Nav ── */
-    .floating-nav {
-      position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
-      z-index: 100; display: flex; align-items: center; gap: 32px;
-      background: rgba(13,10,6,0.8); backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      padding: 14px 32px; border-radius: 100px;
-      border: 1px solid rgba(201,169,110,0.15);
-      transition: all 0.4s ease;
+    .nav {
+      position: fixed; top: 0; left: 0; width: 100%;
+      z-index: 100; padding: 24px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+      mix-blend-mode: difference;
     }
-    .floating-nav.scrolled {
-      top: 16px; padding: 10px 24px;
-      background: rgba(13,10,6,0.95);
-    }
-    .floating-nav .logo {
+    .nav-logo {
       font-family: 'Playfair Display', serif;
-      font-size: 1.1rem; letter-spacing: 2px; color: #c9a96e;
-      white-space: nowrap;
+      font-size: 1.2rem; letter-spacing: 3px; color: #fff;
     }
-    .floating-nav ul { list-style: none; display: flex; gap: 24px; }
-    .floating-nav a {
-      color: rgba(232,213,181,0.7); text-decoration: none;
-      font-size: 0.8rem; font-weight: 300; letter-spacing: 1px;
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.6); font-weight: 300;
       transition: color 0.3s;
     }
-    .floating-nav a:hover { color: #c9a96e; }
+    .nav-links a:hover { color: #fff; }
     .nav-cta {
-      background: #c9a96e; color: #0d0a06 !important;
-      padding: 8px 20px; border-radius: 100px;
+      background: #c9a96e; color: #0a0a08 !important;
+      padding: 10px 24px; border-radius: 100px;
       font-weight: 600 !important; letter-spacing: 1px;
-      transition: transform 0.3s, background 0.3s;
+      transition: transform 0.3s;
     }
-    .nav-cta:hover { transform: scale(1.05); background: #d4b87a; }
+    .nav-cta:hover { transform: scale(1.05); }
 
     /* ── Hero ── */
     .hero {
-      height: 100dvh; display: grid;
-      grid-template-columns: 1fr 1fr;
-      position: relative; overflow: hidden;
+      height: 100dvh; position: relative;
+      display: flex; align-items: flex-end;
+      padding: 0 48px clamp(60px, 8vh, 100px);
+      overflow: hidden;
     }
-    .hero-left {
-      display: flex; flex-direction: column; justify-content: center;
-      padding: clamp(80px, 10vw, 140px) clamp(40px, 8vw, 100px);
-      position: relative; z-index: 2;
+    .hero-video-wrap {
+      position: absolute; inset: 0;
     }
-    .hero-left .tag {
-      display: inline-block; width: fit-content;
-      font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
-      color: #c9a96e; border: 1px solid rgba(201,169,110,0.3);
-      padding: 6px 16px; margin-bottom: 32px;
-      animation: fadeIn 1s 0.2s both;
-    }
-    .hero-left h1 {
-      font-size: clamp(3rem, 7vw, 5.5rem);
-      line-height: 1.05; margin-bottom: 24px;
-      animation: fadeIn 1s 0.4s both;
-    }
-    .hero-left h1 .accent { color: #c9a96e; display: block; }
-    .hero-left p {
-      font-size: clamp(0.95rem, 2vw, 1.15rem);
-      font-weight: 300; color: rgba(232,213,181,0.6);
-      max-width: 420px; margin-bottom: 40px; line-height: 1.8;
-      animation: fadeIn 1s 0.6s both;
-    }
-    .hero-actions {
-      display: flex; gap: 16px; flex-wrap: wrap;
-      animation: fadeIn 1s 0.8s both;
-    }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: #c9a96e; color: #0d0a06;
-      padding: 16px 36px; border-radius: 100px;
-      text-decoration: none; font-weight: 600; font-size: 0.85rem;
-      letter-spacing: 1px; transition: all 0.3s;
-      border: 2px solid #c9a96e;
-    }
-    .btn-primary:hover { background: transparent; color: #c9a96e; transform: translateY(-2px); }
-    .btn-outline {
-      display: inline-flex; align-items: center; gap: 10px;
-      border: 1px solid rgba(201,169,110,0.4); color: #c9a96e;
-      padding: 16px 36px; border-radius: 100px;
-      text-decoration: none; font-size: 0.85rem;
-      letter-spacing: 1px; transition: all 0.3s;
-      background: transparent;
-    }
-    .btn-outline:hover { border-color: #c9a96e; background: rgba(201,169,110,0.1); }
-
-    .hero-right {
-      position: relative; overflow: hidden;
-    }
-    .hero-right img {
+    .hero-video-wrap video {
       width: 100%; height: 100%; object-fit: cover;
-      filter: grayscale(0.4) brightness(0.7) sepia(0.15);
-      animation: fadeIn 1.5s 0.3s both;
+      filter: brightness(0.35) saturate(0.8);
     }
-    .hero-right::after {
+    .hero-video-wrap::after {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(13,10,6,0.3) 0%, transparent 50%, rgba(13,10,6,0.5) 100%);
+      background: linear-gradient(180deg,
+        rgba(10,10,8,0.3) 0%,
+        rgba(10,10,8,0.1) 40%,
+        rgba(10,10,8,0.6) 80%,
+        rgba(10,10,8,1) 100%
+      );
     }
-    .hero-right::before {
-      content: ''; position: absolute; left: -40px; top: 0;
-      width: 80px; height: 100%;
-      background: #0d0a06;
-      clip-path: polygon(0 0, 100% 0, 60% 100%, 0 100%);
-      z-index: 1;
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 900px; padding-bottom: 40px;
     }
-
-    /* ── Stats Bar ── */
-    .stats-bar {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      background: #1c1408;
-      border-top: 1px solid rgba(201,169,110,0.1);
-      border-bottom: 1px solid rgba(201,169,110,0.1);
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase;
+      color: #c9a96e; margin-bottom: 24px;
+      opacity: 0;
     }
-    .stat-item {
-      text-align: center; padding: clamp(24px, 4vh, 40px) 16px;
-      border-right: 1px solid rgba(201,169,110,0.08);
+    .hero-tag::before {
+      content: ''; width: 32px; height: 1px; background: #c9a96e;
     }
-    .stat-item:last-child { border-right: none; }
-    .stat-item .number {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      color: #c9a96e; font-weight: 700;
+    .hero h1 {
+      font-size: clamp(3rem, 7.5vw, 6.5rem);
+      line-height: 1.02; font-weight: 900;
+      margin-bottom: 24px;
     }
-    .stat-item .label {
-      font-size: 0.75rem; color: rgba(232,213,181,0.5);
-      letter-spacing: 2px; text-transform: uppercase; margin-top: 4px;
+    .hero-word {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
     }
-
-    /* ── About ── */
-    .about-section {
-      padding: clamp(80px, 12vh, 140px) 0;
+    .hero-word-inner {
+      display: inline-block;
+      transform: translateY(110%);
+    }
+    .hero-word-inner.accent { color: #c9a96e; }
+    .hero-sub {
+      font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+      font-weight: 300; color: rgba(232,224,212,0.5);
+      max-width: 480px; line-height: 1.8;
+      opacity: 0;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 40px; right: 48px;
+      z-index: 2; display: flex; flex-direction: column;
+      align-items: center; gap: 8px;
+    }
+    .hero-scroll-text {
+      font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); writing-mode: vertical-rl;
+    }
+    .hero-scroll-line {
+      width: 1px; height: 60px;
+      background: rgba(201,169,110,0.3);
       position: relative; overflow: hidden;
     }
-    .about-section::before {
-      content: ''; position: absolute; right: -10%; top: 10%;
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(201,169,110,0.08) 0%, transparent 70%);
-      border-radius: 50%;
+    .hero-scroll-line::after {
+      content: ''; position: absolute; top: -100%;
+      width: 100%; height: 100%;
+      background: #c9a96e;
+      animation: scrollLine 2s infinite;
     }
-    .about-inner {
-      max-width: 1200px; margin: 0 auto;
-      padding: 0 clamp(24px, 5vw, 60px);
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: clamp(40px, 8vw, 100px); align-items: center;
+    @keyframes scrollLine {
+      0% { top: -100%; }
+      100% { top: 100%; }
     }
-    .about-left .eyebrow {
-      font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
-      color: #c9a96e; margin-bottom: 20px;
+
+    /* ── Marquee ── */
+    .marquee-section {
+      padding: clamp(40px, 6vh, 60px) 0;
+      border-top: 1px solid rgba(201,169,110,0.06);
+      border-bottom: 1px solid rgba(201,169,110,0.06);
+      overflow: hidden;
     }
-    .about-left h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.15; margin-bottom: 24px;
+    .marquee-label {
+      text-align: center; font-size: 0.65rem;
+      letter-spacing: 4px; text-transform: uppercase;
+      color: rgba(201,169,110,0.4); margin-bottom: 24px;
     }
-    .about-left h2 .accent { color: #c9a96e; }
-    .about-left p {
-      color: rgba(232,213,181,0.6); font-weight: 300;
-      margin-bottom: 16px; line-height: 1.8;
+    .marquee-track {
+      display: flex; width: max-content;
+      animation: marqueeScroll 30s linear infinite;
     }
-    .about-right {
-      position: relative;
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
-    .about-image-wrapper {
-      position: relative; overflow: hidden;
-      border-radius: 4px;
-    }
-    .about-image-wrapper img {
-      width: 100%; height: 400px; object-fit: cover;
-      filter: grayscale(0.5) brightness(0.8);
-      transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .about-image-wrapper:hover img {
-      filter: grayscale(0) brightness(1);
-      transform: scale(1.05);
-    }
-    .about-image-wrapper::after {
-      content: ''; position: absolute; bottom: 0; left: 0;
-      width: 100%; height: 120px;
-      background: linear-gradient(to top, #0d0a06, transparent);
-    }
-    .about-year {
-      position: absolute; bottom: 32px; right: 32px; z-index: 1;
+    .marquee-item {
+      flex-shrink: 0; padding: 0 clamp(24px, 4vw, 48px);
       font-family: 'Playfair Display', serif;
-      font-size: 4rem; color: rgba(201,169,110,0.15);
-      font-weight: 700; line-height: 1;
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      color: rgba(232,224,212,0.12);
+      white-space: nowrap; font-weight: 700;
+      letter-spacing: 2px;
+    }
+    .marquee-item .dot {
+      display: inline-block; width: 6px; height: 6px;
+      background: rgba(201,169,110,0.3);
+      border-radius: 50%; vertical-align: middle;
+      margin: 0 clamp(16px, 3vw, 32px);
+    }
+
+    /* ── Statement ── */
+    .statement {
+      padding: clamp(100px, 16vh, 200px) 48px;
+      text-align: center; position: relative;
+    }
+    .statement h2 {
+      font-size: clamp(2.2rem, 5.5vw, 4.5rem);
+      line-height: 1.15; max-width: 900px;
+      margin: 0 auto; font-weight: 700;
+    }
+    .statement .accent { color: #c9a96e; }
+    .statement-line {
+      display: inline-block; overflow: hidden;
+      vertical-align: bottom;
+    }
+    .statement-line-inner {
+      display: inline-block; transform: translateY(110%);
+    }
+
+    /* ── Rings ── */
+    .rings-section {
+      padding: clamp(80px, 12vh, 160px) 0;
+      position: relative; overflow: hidden;
+    }
+    .rings-stage {
+      position: relative; width: 100%;
+      height: clamp(400px, 60vh, 600px);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ring {
+      position: absolute; border-radius: 50%;
+      border: 1px solid rgba(201,169,110,0.1);
+    }
+    .ring-1 { width: 200px; height: 200px; animation: ringPulse 4s ease-in-out infinite; }
+    .ring-2 { width: 350px; height: 350px; animation: ringPulse 4s 0.5s ease-in-out infinite; }
+    .ring-3 { width: 500px; height: 500px; animation: ringPulse 4s 1s ease-in-out infinite; }
+    .ring-4 { width: 650px; height: 650px; animation: ringPulse 4s 1.5s ease-in-out infinite; }
+    @keyframes ringPulse {
+      0%, 100% { transform: scale(1); opacity: 0.3; }
+      50% { transform: scale(1.08); opacity: 0.08; }
+    }
+    .rings-content {
+      position: relative; z-index: 2; text-align: center;
+      padding: 0 24px;
+    }
+    .rings-content h2 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.15; margin-bottom: 20px;
+    }
+    .rings-content p {
+      font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+      color: rgba(232,224,212,0.5); font-weight: 300;
+      max-width: 500px; margin: 0 auto; line-height: 1.8;
     }
 
     /* ── Services ── */
-    .services-section {
-      padding: clamp(80px, 12vh, 140px) 0;
-      background: linear-gradient(180deg, #0d0a06 0%, #1c1408 50%, #0d0a06 100%);
+    .services {
+      padding: clamp(80px, 12vh, 160px) 48px;
       position: relative;
-    }
-    .services-section::before {
-      content: ''; position: absolute; inset: 0;
-      background: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920&q=60') center/cover no-repeat;
-      opacity: 0.02;
     }
     .services-header {
-      text-align: center; margin-bottom: clamp(48px, 8vh, 80px);
-      max-width: 600px; margin-left: auto; margin-right: auto;
-      padding: 0 24px;
+      display: flex; justify-content: space-between;
+      align-items: flex-end; margin-bottom: clamp(48px, 8vh, 80px);
+      flex-wrap: wrap; gap: 24px;
     }
     .services-header .eyebrow {
-      font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
-      color: #c9a96e; margin-bottom: 16px;
+      font-size: 0.65rem; letter-spacing: 4px;
+      text-transform: uppercase; color: #c9a96e;
+      margin-bottom: 12px;
     }
-    .services-header h2 {
-      font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px;
-    }
+    .services-header h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
     .services-header p {
-      color: rgba(232,213,181,0.5); font-weight: 300;
+      color: rgba(232,224,212,0.4); font-weight: 300;
+      max-width: 360px; font-size: 0.9rem;
     }
-    .services-scroll {
-      display: flex; gap: 24px;
-      padding: 0 clamp(24px, 5vw, 60px);
-      overflow-x: auto; scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+      gap: 2px;
     }
-    .services-scroll::-webkit-scrollbar { display: none; }
-    .service-item {
-      min-width: 300px; max-width: 320px;
-      background: rgba(28,20,8,0.6);
-      border: 1px solid rgba(201,169,110,0.08);
-      border-radius: 8px; padding: 32px;
-      scroll-snap-align: start;
-      transition: all 0.4s ease;
+    .service-card {
+      background: rgba(20,16,10,0.6);
+      padding: clamp(32px, 5vw, 48px);
+      position: relative; overflow: hidden;
+      transition: background 0.5s;
+      cursor: pointer;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: linear-gradient(90deg, transparent, #c9a96e, transparent);
+      transform: scaleX(0); transition: transform 0.6s;
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover { background: rgba(30,24,14,0.8); }
+    .service-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.8rem; color: rgba(201,169,110,0.3);
+      margin-bottom: 24px; font-weight: 700;
+    }
+    .service-card h3 {
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      margin-bottom: 12px; line-height: 1.2;
+    }
+    .service-card p {
+      color: rgba(232,224,212,0.45); font-weight: 300;
+      font-size: 0.9rem; line-height: 1.7; margin-bottom: 20px;
+    }
+    .service-card .price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; color: #c9a96e;
+    }
+    .service-card .price span {
+      font-size: 0.75rem; color: rgba(201,169,110,0.5);
+      font-family: 'Inter', sans-serif; font-weight: 300;
+    }
+    .service-card-arrow {
+      position: absolute; bottom: 32px; right: 32px;
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 1px solid rgba(201,169,110,0.2);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.4s; opacity: 0; transform: translateX(-10px);
+    }
+    .service-card:hover .service-card-arrow {
+      opacity: 1; transform: translateX(0);
+    }
+    .service-card-arrow svg { width: 14px; height: 14px; }
+
+    /* ── Split Section ── */
+    .split {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
+    }
+    .split-image {
       position: relative; overflow: hidden;
     }
-    .service-item::before {
-      content: ''; position: absolute; top: 0; left: 0;
-      width: 100%; height: 3px;
-      background: linear-gradient(90deg, transparent, #c9a96e, transparent);
-      opacity: 0; transition: opacity 0.4s;
+    .split-image img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: brightness(0.6) grayscale(0.3);
+      transition: transform 1.5s cubic-bezier(0.25,0.46,0.45,0.94);
     }
-    .service-item:hover::before { opacity: 1; }
-    .service-item:hover {
-      border-color: rgba(201,169,110,0.2);
-      transform: translateY(-4px);
+    .split-image:hover img { transform: scale(1.05); }
+    .split-image::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent 60%, #0a0a08 100%);
     }
-    .service-icon {
-      width: 56px; height: 56px;
-      background: rgba(201,169,110,0.1);
-      border-radius: 12px; display: flex;
-      align-items: center; justify-content: center;
+    .split-text {
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: clamp(40px, 8vw, 100px);
+      background: #0a0a08;
+    }
+    .split-text .eyebrow {
+      font-size: 0.65rem; letter-spacing: 4px;
+      text-transform: uppercase; color: #c9a96e;
       margin-bottom: 20px;
     }
-    .service-icon svg { width: 28px; height: 28px; }
-    .service-item h3 {
-      font-size: 1.2rem; margin-bottom: 8px; color: #e8d5b5;
+    .split-text h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.15; margin-bottom: 24px;
     }
-    .service-item p {
-      font-size: 0.85rem; color: rgba(232,213,181,0.5);
-      font-weight: 300; margin-bottom: 16px; line-height: 1.6;
+    .split-text p {
+      color: rgba(232,224,212,0.5); font-weight: 300;
+      line-height: 1.8; margin-bottom: 16px;
     }
-    .service-price {
+    .split-text .stats-row {
+      display: flex; gap: 48px; margin-top: 32px;
+      padding-top: 32px; border-top: 1px solid rgba(201,169,110,0.08);
+    }
+    .split-text .stat .num {
       font-family: 'Playfair Display', serif;
-      font-size: 1.4rem; color: #c9a96e; font-weight: 700;
+      font-size: 2.5rem; color: #c9a96e; font-weight: 700;
     }
-    .service-price span { font-size: 0.8rem; color: rgba(201,169,110,0.6); font-weight: 400; }
-    .services-cta {
-      text-align: center; margin-top: clamp(40px, 6vh, 60px);
+    .split-text .stat .label {
+      font-size: 0.7rem; color: rgba(232,224,212,0.4);
+      letter-spacing: 2px; text-transform: uppercase;
     }
 
-    /* ── Gallery ── */
-    .gallery-section {
-      padding: clamp(80px, 12vh, 140px) 0;
-      position: relative;
+    /* ── Gallery Horizontal ── */
+    .gallery {
+      padding: clamp(80px, 12vh, 160px) 0;
+      overflow: hidden;
     }
     .gallery-header {
-      text-align: center; margin-bottom: clamp(48px, 8vh, 80px);
-      padding: 0 24px;
+      padding: 0 48px; margin-bottom: clamp(40px, 6vh, 60px);
+      display: flex; justify-content: space-between;
+      align-items: flex-end; flex-wrap: wrap; gap: 16px;
     }
     .gallery-header .eyebrow {
-      font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
-      color: #c9a96e; margin-bottom: 16px;
+      font-size: 0.65rem; letter-spacing: 4px;
+      text-transform: uppercase; color: #c9a96e;
+      margin-bottom: 12px;
     }
-    .gallery-header h2 {
-      font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px;
-    }
-    .gallery-header p {
-      color: rgba(232,213,181,0.5); font-weight: 300;
-    }
-    .gallery-masonry {
-      max-width: 1200px; margin: 0 auto;
-      padding: 0 clamp(24px, 5vw, 60px);
-      columns: 3; column-gap: 16px;
+    .gallery-header h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
+    .gallery-track {
+      display: flex; gap: 16px;
+      padding: 0 48px;
+      width: max-content;
     }
     .gallery-item {
-      break-inside: avoid; margin-bottom: 16px;
-      position: relative; overflow: hidden;
-      border-radius: 4px; cursor: pointer;
+      width: clamp(280px, 35vw, 450px);
+      flex-shrink: 0; position: relative;
+      overflow: hidden; border-radius: 4px;
+      cursor: pointer;
     }
     .gallery-item img {
-      width: 100%; display: block;
-      filter: grayscale(0.6) brightness(0.8);
-      transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      width: 100%; height: clamp(300px, 40vw, 500px);
+      object-fit: cover;
+      filter: grayscale(0.6) brightness(0.7);
+      transition: all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);
     }
     .gallery-item:hover img {
       filter: grayscale(0) brightness(1);
@@ -394,255 +459,269 @@
     }
     .gallery-item::after {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(13,10,6,0.8) 0%, transparent 50%);
-      opacity: 0; transition: opacity 0.4s;
+      background: linear-gradient(to top, rgba(10,10,8,0.9) 0%, transparent 60%);
+      opacity: 0; transition: opacity 0.5s;
     }
     .gallery-item:hover::after { opacity: 1; }
-    .gallery-item .overlay-text {
-      position: absolute; bottom: 16px; left: 16px;
-      color: #e8d5b5; font-size: 0.85rem;
-      font-weight: 300; opacity: 0;
-      transform: translateY(10px);
-      transition: all 0.4s;
+    .gallery-item-info {
+      position: absolute; bottom: 20px; left: 20px; right: 20px;
+      z-index: 1; opacity: 0; transform: translateY(10px);
+      transition: all 0.5s;
     }
-    .gallery-item:hover .overlay-text {
+    .gallery-item:hover .gallery-item-info {
       opacity: 1; transform: translateY(0);
+    }
+    .gallery-item-info h4 { font-size: 1rem; margin-bottom: 4px; }
+    .gallery-item-info p {
+      font-size: 0.75rem; color: rgba(232,224,212,0.5);
+      font-weight: 300;
+    }
+
+    /* ── Toggle Section ── */
+    .toggle-section {
+      padding: clamp(80px, 14vh, 180px) 48px;
+      text-align: center; position: relative;
+      overflow: hidden;
+    }
+    .toggle-rings {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .toggle-ring {
+      position: absolute; border-radius: 50%;
+      border: 1px solid rgba(201,169,110,0.06);
+    }
+    .toggle-ring-1 { width: 300px; height: 300px; }
+    .toggle-ring-2 { width: 500px; height: 500px; }
+    .toggle-ring-3 { width: 700px; height: 700px; }
+    .toggle-ring-4 { width: 900px; height: 900px; }
+    .toggle-content {
+      position: relative; z-index: 2;
+    }
+    .toggle-content .eyebrow {
+      font-size: 0.65rem; letter-spacing: 4px;
+      text-transform: uppercase; color: #c9a96e;
+      margin-bottom: 20px;
+    }
+    .toggle-content h2 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 1.05; margin-bottom: 24px;
+    }
+    .toggle-content p {
+      font-size: 1rem; color: rgba(232,224,212,0.5);
+      font-weight: 300; max-width: 500px; margin: 0 auto;
+      line-height: 1.8;
     }
 
     /* ── Contact ── */
-    .contact-section {
-      padding: clamp(80px, 12vh, 140px) 0;
-      background: linear-gradient(180deg, #0d0a06 0%, #1c1408 100%);
+    .contact {
+      padding: clamp(80px, 12vh, 160px) 48px;
       position: relative;
     }
     .contact-inner {
       max-width: 1200px; margin: 0 auto;
-      padding: 0 clamp(24px, 5vw, 60px);
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: clamp(40px, 8vw, 80px);
+      gap: clamp(40px, 8vw, 100px);
+      align-items: start;
     }
     .contact-left .eyebrow {
-      font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
-      color: #c9a96e; margin-bottom: 16px;
+      font-size: 0.65rem; letter-spacing: 4px;
+      text-transform: uppercase; color: #c9a96e;
+      margin-bottom: 16px;
     }
     .contact-left h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(2rem, 4vw, 3.2rem);
       line-height: 1.15; margin-bottom: 24px;
     }
     .contact-left h2 .accent { color: #c9a96e; }
     .contact-left > p {
-      color: rgba(232,213,181,0.6); font-weight: 300;
-      margin-bottom: 32px; line-height: 1.8;
+      color: rgba(232,224,212,0.5); font-weight: 300;
+      line-height: 1.8; margin-bottom: 40px;
     }
-    .contact-details {
-      display: flex; flex-direction: column; gap: 20px;
-    }
-    .contact-detail {
-      display: flex; align-items: flex-start; gap: 16px;
-    }
-    .contact-detail-icon {
-      width: 44px; height: 44px; flex-shrink: 0;
-      background: rgba(201,169,110,0.1);
-      border-radius: 10px; display: flex;
-      align-items: center; justify-content: center;
-    }
-    .contact-detail-icon svg { width: 20px; height: 20px; }
-    .contact-detail-text .label {
-      font-size: 0.7rem; color: rgba(232,213,181,0.4);
-      letter-spacing: 2px; text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-    .contact-detail-text .value {
-      color: #e8d5b5; font-weight: 300;
-    }
-    .contact-detail-text a {
-      color: #c9a96e; text-decoration: none;
-      transition: color 0.3s;
-    }
-    .contact-detail-text a:hover { color: #d4b87a; }
-    .contact-hours {
-      margin-top: 32px; padding-top: 24px;
-      border-top: 1px solid rgba(201,169,110,0.1);
-    }
-    .contact-hours h3 {
-      font-size: 1rem; margin-bottom: 16px; color: #c9a96e;
-    }
-    .hours-list { list-style: none; }
-    .hours-list li {
+    .contact-info-list { list-style: none; }
+    .contact-info-list li {
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(201,169,110,0.06);
       display: flex; justify-content: space-between;
-      padding: 8px 0; border-bottom: 1px solid rgba(201,169,110,0.05);
-      color: rgba(232,213,181,0.6); font-weight: 300;
+      align-items: center;
     }
-    .hours-list li span:last-child { color: #e8d5b5; }
-
-    .contact-form-card {
-      background: rgba(28,20,8,0.4);
-      border: 1px solid rgba(201,169,110,0.1);
+    .contact-info-list .label {
+      font-size: 0.7rem; letter-spacing: 2px;
+      text-transform: uppercase; color: rgba(232,224,212,0.35);
+    }
+    .contact-info-list .value { font-weight: 300; }
+    .contact-info-list a { color: #c9a96e; transition: color 0.3s; }
+    .contact-info-list a:hover { color: #d4b87a; }
+    .contact-form-wrap {
+      background: rgba(20,16,10,0.4);
+      border: 1px solid rgba(201,169,110,0.06);
       border-radius: 8px; padding: clamp(24px, 4vw, 40px);
     }
-    .contact-form-card h3 {
-      font-size: 1.3rem; margin-bottom: 24px; color: #c9a96e;
+    .contact-form-wrap h3 {
+      font-size: 1.2rem; margin-bottom: 24px; color: #c9a96e;
     }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .form-group { margin-bottom: 16px; }
     .form-group label {
-      display: block; font-size: 0.7rem; font-weight: 400;
-      color: rgba(232,213,181,0.4); letter-spacing: 2px;
-      text-transform: uppercase; margin-bottom: 8px;
+      display: block; font-size: 0.65rem; letter-spacing: 2px;
+      text-transform: uppercase; color: rgba(232,224,212,0.35);
+      margin-bottom: 8px;
     }
     .form-group input, .form-group textarea {
       width: 100%; padding: 14px 16px;
-      background: rgba(13,10,6,0.5);
-      border: 1px solid rgba(201,169,110,0.1);
-      border-radius: 6px; color: #e8d5b5;
+      background: rgba(10,10,8,0.6);
+      border: 1px solid rgba(201,169,110,0.08);
+      border-radius: 6px; color: #e8e0d4;
       font-family: 'Inter', sans-serif; font-size: 0.9rem;
-      font-weight: 300; transition: all 0.3s; outline: none;
+      font-weight: 300; outline: none; transition: all 0.3s;
     }
     .form-group input::placeholder, .form-group textarea::placeholder {
-      color: rgba(232,213,181,0.2);
+      color: rgba(232,224,212,0.2);
     }
     .form-group input:focus, .form-group textarea:focus {
-      border-color: #c9a96e;
-      background: rgba(28,20,8,0.6);
-      box-shadow: 0 0 0 3px rgba(201,169,110,0.08);
+      border-color: rgba(201,169,110,0.3);
+      box-shadow: 0 0 0 3px rgba(201,169,110,0.05);
     }
     .form-group textarea { resize: vertical; min-height: 120px; }
     .form-group.error input, .form-group.error textarea {
       border-color: rgba(200,100,80,0.6);
     }
     .form-group .error-text {
-      font-size: 0.75rem; color: #c86450;
-      margin-top: 6px; font-weight: 300; display: none;
+      font-size: 0.7rem; color: #c86450;
+      margin-top: 6px; display: none; font-weight: 300;
     }
     .form-group.error .error-text { display: block; }
     .form-submit {
       width: 100%; padding: 16px;
-      background: #c9a96e; color: #0d0a06;
+      background: #c9a96e; color: #0a0a08;
       border: none; border-radius: 6px;
-      font-family: 'Inter', sans-serif; font-size: 0.85rem;
+      font-family: 'Inter', sans-serif; font-size: 0.8rem;
       font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
       cursor: pointer; transition: all 0.3s;
     }
     .form-submit:hover { background: #d4b87a; transform: translateY(-2px); }
-    .form-submit:active { transform: scale(0.98); }
     .form-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
     .form-status {
       margin-top: 16px; padding: 12px 16px;
       border-radius: 6px; font-size: 0.85rem;
       font-weight: 300; display: none; text-align: center;
     }
-    .form-status.success {
-      display: block; background: rgba(100,180,120,0.1);
-      border: 1px solid rgba(100,180,120,0.3); color: #64b478;
-    }
-    .form-status.error {
-      display: block; background: rgba(200,100,80,0.1);
-      border: 1px solid rgba(200,100,80,0.3); color: #c86450;
-    }
-    .form-status.sending {
-      display: block; background: rgba(201,169,110,0.1);
-      border: 1px solid rgba(201,169,110,0.3); color: #c9a96e;
-    }
-
-    /* ── Map ── */
-    .map-section {
-      height: 400px; position: relative;
-    }
-    .map-section iframe {
-      width: 100%; height: 100%; border: 0;
-      filter: sepia(0.4) brightness(0.7) hue-rotate(-10deg);
-    }
-    .map-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(180deg, #0d0a06 0%, transparent 20%, transparent 80%, #0d0a06 100%);
-      pointer-events: none;
-    }
+    .form-status.success { display: block; background: rgba(100,180,120,0.1); border: 1px solid rgba(100,180,120,0.3); color: #64b478; }
+    .form-status.error { display: block; background: rgba(200,100,80,0.1); border: 1px solid rgba(200,100,80,0.3); color: #c86450; }
+    .form-status.sending { display: block; background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.3); color: #c9a96e; }
 
     /* ── Footer ── */
     footer {
-      background: #0d0a06;
-      border-top: 1px solid rgba(201,169,110,0.08);
-      padding: clamp(32px, 5vh, 48px) 0;
+      border-top: 1px solid rgba(201,169,110,0.06);
+      padding: clamp(40px, 6vh, 60px) 48px;
     }
     .footer-inner {
       max-width: 1200px; margin: 0 auto;
-      padding: 0 clamp(24px, 5vw, 60px);
-      display: flex; justify-content: space-between;
-      align-items: center; flex-wrap: wrap; gap: 24px;
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
     }
     .footer-brand {
       font-family: 'Playfair Display', serif;
-      font-size: 1.2rem; color: #c9a96e; letter-spacing: 2px;
+      font-size: 1.5rem; color: #c9a96e;
+      letter-spacing: 3px; margin-bottom: 16px;
     }
-    .footer-links { display: flex; gap: 24px; }
-    .footer-links a {
-      color: rgba(232,213,181,0.5); text-decoration: none;
-      font-size: 0.8rem; font-weight: 300; letter-spacing: 1px;
-      transition: color 0.3s;
+    .footer-brand-desc {
+      color: rgba(232,224,212,0.35); font-weight: 300;
+      font-size: 0.85rem; max-width: 300px; line-height: 1.7;
     }
-    .footer-links a:hover { color: #c9a96e; }
-    .footer-social { display: flex; gap: 12px; }
-    .footer-social a {
-      width: 40px; height: 40px;
-      background: rgba(201,169,110,0.08);
-      border-radius: 50%; display: flex;
-      align-items: center; justify-content: center;
-      color: #c9a96e; text-decoration: none;
-      transition: all 0.3s;
+    .footer-col h4 {
+      font-size: 0.65rem; letter-spacing: 3px;
+      text-transform: uppercase; color: rgba(201,169,110,0.5);
+      margin-bottom: 20px; font-family: 'Inter', sans-serif;
+      font-weight: 500;
     }
-    .footer-social a:hover {
-      background: rgba(201,169,110,0.2);
-      transform: translateY(-2px);
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 10px; }
+    .footer-col a {
+      font-size: 0.85rem; color: rgba(232,224,212,0.45);
+      font-weight: 300; transition: color 0.3s;
     }
+    .footer-col a:hover { color: #c9a96e; }
     .footer-bottom {
-      text-align: center; margin-top: 24px; padding-top: 24px;
-      border-top: 1px solid rgba(201,169,110,0.05);
-      color: rgba(232,213,181,0.3); font-size: 0.75rem;
+      max-width: 1200px; margin: 32px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid rgba(201,169,110,0.04);
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-bottom p {
+      font-size: 0.75rem; color: rgba(232,224,212,0.25);
       font-weight: 300;
+    }
+    .footer-socials { display: flex; gap: 12px; }
+    .footer-socials a {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(201,169,110,0.06);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(201,169,110,0.5); transition: all 0.3s;
+    }
+    .footer-socials a:hover {
+      background: rgba(201,169,110,0.15); color: #c9a96e;
+      transform: translateY(-2px);
     }
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-right { display: none; }
-      .hero-left { padding: clamp(100px, 15vh, 140px) clamp(24px, 5vw, 40px); }
-      .floating-nav { gap: 16px; padding: 10px 20px; }
-      .floating-nav ul { gap: 12px; }
-      .floating-nav a { font-size: 0.7rem; }
-      .nav-cta { display: none; }
-      .stats-bar { grid-template-columns: repeat(2, 1fr); }
-      .about-inner { grid-template-columns: 1fr; }
-      .gallery-masonry { columns: 2; }
+      .nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 0 24px clamp(40px, 6vh, 80px); }
+      .services { padding: clamp(60px, 10vh, 120px) 24px; }
+      .split { grid-template-columns: 1fr; }
+      .split-image { height: 50vh; }
+      .split-image::after { background: linear-gradient(180deg, transparent 60%, #0a0a08 100%); }
+      .gallery-header, .services-header { padding: 0 24px; }
+      .gallery-track { padding: 0 24px; }
+      .contact { padding: clamp(60px, 10vh, 120px) 24px; }
       .contact-inner { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
-      .footer-inner { flex-direction: column; text-align: center; }
-      .footer-links { flex-wrap: wrap; justify-content: center; }
-      .footer-social { justify-content: center; }
+      footer { padding: clamp(32px, 5vh, 48px) 24px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .cursor { display: none; }
     }
     @media (max-width: 480px) {
-      .floating-nav { width: calc(100% - 32px); justify-content: center; }
-      .floating-nav ul { display: none; }
-      .hero-left h1 { font-size: 2.5rem; }
-      .hero-actions { flex-direction: column; }
-      .stats-bar { grid-template-columns: 1fr 1fr; }
-      .service-item { min-width: 260px; }
-      .gallery-masonry { columns: 1; }
-      .map-section { height: 300px; }
+      .hero h1 { font-size: 2.5rem; }
+      .statement h2 { font-size: 2rem; }
+      .rings-content h2 { font-size: 2rem; }
+      .toggle-content h2 { font-size: 2.5rem; }
+      .gallery-item { width: 260px; }
     }
     @media print {
-      .floating-nav, .hero-right, .stats-bar, .gallery-section,
-      .map-section, .contact-form-card { display: none !important; }
+      .preloader, .nav, .cursor, .hero-video-wrap, .marquee-section,
+      .rings-section, .toggle-section, .gallery, .hero-scroll { display: none !important; }
       body { background: #fff; color: #000; }
-      .hero { height: auto; }
-      .reveal { opacity: 1; transform: none; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .marquee-track { animation: none; }
     }
   </style>
 </head>
 <body>
 
-<nav class="floating-nav" id="navbar">
-  <div class="logo">St.Athena</div>
-  <ul>
+<!-- Preloader -->
+<div class="preloader" id="preloader">
+  <div class="preloader-logo" id="preloaderLogo">St.Athena</div>
+  <div class="preloader-bar-track"><div class="preloader-bar" id="preloaderBar"></div></div>
+  <div class="preloader-percent" id="preloaderPercent">0%</div>
+</div>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-logo">St.Athena</div>
+  <ul class="nav-links">
     <li><a href="#about">O nama</a></li>
     <li><a href="#services">Usluge</a></li>
     <li><a href="#gallery">Galerija</a></li>
@@ -651,234 +730,238 @@
   <a href="tel:+3816xxxxxxx" class="nav-cta">Zakaži</a>
 </nav>
 
+<!-- Hero -->
 <section class="hero">
-  <div class="hero-left">
-    <span class="tag">Beograd · Slavija</span>
-    <h1>
-      Mjesto gdje<br>
-      <span class="accent">stil dobija</span><br>
-      svoju priču
+  <div class="hero-video-wrap">
+    <video autoplay muted loop playsinline preload="auto" poster="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1920&q=80">
+      <source src="https://cdn.coverr.co/videos/coverr-a-barber-cutting-a-mans-hair-2707/1080p.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag" id="heroTag">Beograd · Slavija</div>
+    <h1 id="heroTitle">
+      <span class="hero-word"><span class="hero-word-inner">Mjesto</span></span>
+      <span class="hero-word"><span class="hero-word-inner">gdje</span></span>
+      <span class="hero-word"><span class="hero-word-inner accent">stil</span></span><br>
+      <span class="hero-word"><span class="hero-word-inner">dobija</span></span>
+      <span class="hero-word"><span class="hero-word-inner accent">svoju</span></span>
+      <span class="hero-word"><span class="hero-word-inner accent">priču</span></span>
     </h1>
-    <p>Premium barbershop iskustvo u srcu Beograda. Klasična tradicija, savremeni pristup — svaki put kad zakoračite kod nas.</p>
-    <div class="hero-actions">
-      <a href="tel:+3816xxxxxxx" class="btn-primary">Zakaži termin</a>
-      <a href="#services" class="btn-outline">Pogledaj usluge</a>
-    </div>
+    <p class="hero-sub" id="heroSub">Premium barbershop iskustvo u srcu Beograda. Klasična tradicija, savremeni pristup.</p>
   </div>
-  <div class="hero-right">
-    <img src="https://images.unsplash.com/photo-1675599193884-38c7a5ceecbc?w=900&q=85" alt="St.Athena barbershop enterijer" loading="eager">
+  <div class="hero-scroll">
+    <span class="hero-scroll-text">Scroll</span>
+    <div class="hero-scroll-line"></div>
   </div>
 </section>
 
-<div class="stats-bar reveal">
-  <div class="stat-item">
-    <div class="number">7+</div>
-    <div class="label">Godina iskustva</div>
+<!-- Marquee -->
+<section class="marquee-section">
+  <div class="marquee-label">St.Athena · Premium Barbershop · Beograd</div>
+  <div class="marquee-track">
+    <div class="marquee-item">Šišanje <span class="dot"></span></div>
+    <div class="marquee-item">Brijanje <span class="dot"></span></div>
+    <div class="marquee-item">Brada <span class="dot"></span></div>
+    <div class="marquee-item">Styling <span class="dot"></span></div>
+    <div class="marquee-item">Facial <span class="dot"></span></div>
+    <div class="marquee-item">Farbanje <span class="dot"></span></div>
+    <div class="marquee-item">Šišanje <span class="dot"></span></div>
+    <div class="marquee-item">Brijanje <span class="dot"></span></div>
+    <div class="marquee-item">Brada <span class="dot"></span></div>
+    <div class="marquee-item">Styling <span class="dot"></span></div>
+    <div class="marquee-item">Facial <span class="dot"></span></div>
+    <div class="marquee-item">Farbanje <span class="dot"></span></div>
   </div>
-  <div class="stat-item">
-    <div class="number">5k+</div>
-    <div class="label">Zadovoljnih klijenata</div>
-  </div>
-  <div class="stat-item">
-    <div class="number">15+</div>
-    <div class="label">Usluga</div>
-  </div>
-  <div class="stat-item">
-    <div class="number">4.9</div>
-    <div class="label">Ocena na Google</div>
-  </div>
-</div>
+</section>
 
-<section class="about-section" id="about">
-  <div class="about-inner">
-    <div class="about-left reveal">
-      <div class="eyebrow">O nama</div>
-      <h2>Više od salona — <span class="accent">iskustvo</span></h2>
-      <p>St.Athena je mjesto gdje se susreću klasična barber tradicija i savremeni urbani stil. Svaki dolazak je priča za sebe — pažljivo osmišljena od ulaska do izlaska.</p>
-      <p>Naš tim vrhunskih barbera koristimo samo najbolje preparate i tehnike, jer znamo da detalji čine razliku.</p>
-    </div>
-    <div class="about-right reveal reveal-delay-2">
-      <div class="about-image-wrapper">
-        <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&q=85" alt="Barber pri radu" loading="lazy">
-      </div>
-      <div class="about-year">2019</div>
+<!-- Statement -->
+<section class="statement">
+  <h2 id="statementTitle">
+    <span class="statement-line"><span class="statement-line-inner">Klasična</span></span>
+    <span class="statement-line"><span class="statement-line-inner accent">tradicija.</span></span><br>
+    <span class="statement-line"><span class="statement-line-inner">Savremeni</span></span>
+    <span class="statement-line"><span class="statement-line-inner">pristup.</span></span>
+  </h2>
+</section>
+
+<!-- Rings / Mission -->
+<section class="rings-section">
+  <div class="rings-stage">
+    <div class="ring ring-1"></div>
+    <div class="ring ring-2"></div>
+    <div class="ring ring-3"></div>
+    <div class="ring ring-4"></div>
+    <div class="rings-content reveal">
+      <h2>Svaki detalj<br><span style="color:#c9a96e;">je važan</span></h2>
+      <p>Od ulaska do izlaska — svaki trenutak je pažljivo osmišljen da vam pruži iskustvo koje ćete pamtiti.</p>
     </div>
   </div>
 </section>
 
-<section class="services-section" id="services">
-  <div class="services-header reveal">
-    <div class="eyebrow">Usluge</div>
-    <h2>Šta nudimo</h2>
-    <p>Svaka usluga je pažljivo osmišljena da vam pruži vrhunsko iskustvo</p>
+<!-- Services -->
+<section class="services" id="services">
+  <div class="services-header">
+    <div>
+      <div class="eyebrow reveal">Usluge</div>
+      <h2 class="reveal">Šta nudimo</h2>
+    </div>
+    <p class="reveal">Profesionalne usluge prilagođene vašem stilu i potrebama.</p>
   </div>
-  <div class="services-scroll">
-    <div class="service-item reveal">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M7 3v4M17 3v4M3 11h4M17 11h4M5 7h14a2 2 0 012 2v2a2 2 0 01-2 2H5a2 2 0 01-2-2V9a2 2 0 012-2z"/><path d="M12 15v6M9 18h6"/></svg>
-      </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-number">01</div>
       <h3>Šišanje muško</h3>
       <p>Klasično i moderno šišanje prilagođeno vašem stilu, uz finalni styling</p>
-      <div class="service-price">1.500 <span>RSD</span></div>
+      <div class="price">1.500 <span>RSD</span></div>
+      <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
     </div>
-    <div class="service-item reveal reveal-delay-1">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-      </div>
+    <div class="service-card reveal">
+      <div class="service-number">02</div>
       <h3>Brijanje</h3>
-      <p>Tradicionalno brijanje vrućim peškirom i premium pjenom za savršen osjećaj</p>
-      <div class="service-price">1.200 <span>RSD</span></div>
+      <p>Tradicionalno brijanje vrućim peškirom i premium pjenom</p>
+      <div class="price">1.200 <span>RSD</span></div>
+      <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
     </div>
-    <div class="service-item reveal reveal-delay-2">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-      </div>
+    <div class="service-card reveal">
+      <div class="service-number">03</div>
       <h3>Brada trim</h3>
-      <p>Oblikovanje i doterivanje brade preciznim tehnikama naših barbera</p>
-      <div class="service-price">800 <span>RSD</span></div>
+      <p>Oblikovanje i doterivanje brade preciznim tehnikama</p>
+      <div class="price">800 <span>RSD</span></div>
+      <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
     </div>
-    <div class="service-item reveal">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="10"/></svg>
-      </div>
+    <div class="service-card reveal">
+      <div class="service-number">04</div>
       <h3>Šišanje + brada</h3>
-      <p>Kompletno sređivanje — šišanje i brada u jednom terminu sa popustom</p>
-      <div class="service-price">2.000 <span>RSD</span></div>
+      <p>Kompletno sređivanje u jednom terminu sa popustom</p>
+      <div class="price">2.000 <span>RSD</span></div>
+      <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
     </div>
-    <div class="service-item reveal reveal-delay-1">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>
-      </div>
+    <div class="service-card reveal">
+      <div class="service-number">05</div>
       <h3>Facial tretman</h3>
-      <p>Čišćenje lica, piling i hidratacija za svjež i odmoran izgled</p>
-      <div class="service-price">1.500 <span>RSD</span></div>
+      <p>Čišćenje lica, piling i hidratacija za svjež izgled</p>
+      <div class="price">1.500 <span>RSD</span></div>
+      <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
     </div>
-    <div class="service-item reveal reveal-delay-2">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      </div>
-      <h3>Dečije šišanje</h3>
-      <p>Šišanje za dečake do 12 godina — strpljivo i pažljivo</p>
-      <div class="service-price">1.000 <span>RSD</span></div>
-    </div>
-    <div class="service-item reveal">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M12 2v6M12 16v6M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M16 12h6M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/></svg>
-      </div>
-      <h3>Boja brade</h3>
-      <p>Profesionalno bojenje brade za prirodan i postojan rezultat</p>
-      <div class="service-price">1.200 <span>RSD</span></div>
-    </div>
-    <div class="service-item reveal reveal-delay-1">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M4 4h16v4H4zM4 12h16v8H4z"/></svg>
-      </div>
-      <h3>Farbanje kose</h3>
-      <p>Boja za kosu sa šišanjem — potpuna transformacija stila</p>
-      <div class="service-price">2.500 <span>RSD</span></div>
-    </div>
-    <div class="service-item reveal reveal-delay-2">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10z"/><path d="M12 8v4l3 3"/></svg>
-      </div>
+    <div class="service-card reveal">
+      <div class="service-number">06</div>
       <h3>Komplet paket</h3>
-      <p>Šišanje + brada + facial tretman — sve što vam treba u jednom terminu</p>
-      <div class="service-price">3.500 <span>RSD</span></div>
+      <p>Šišanje + brada + facial — sve u jednom terminu</p>
+      <div class="price">3.500 <span>RSD</span></div>
+      <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
     </div>
-  </div>
-  <div class="services-cta reveal">
-    <a href="tel:+3816xxxxxxx" class="btn-primary">Pozovi i zakaži</a>
   </div>
 </section>
 
-<section class="gallery-section" id="gallery">
-  <div class="gallery-header reveal">
-    <div class="eyebrow">Galerija</div>
-    <h2>Naš rad</h2>
-    <p>Pogledajte djela naših barbera</p>
+<!-- Split About -->
+<section class="split" id="about">
+  <div class="split-image">
+    <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=900&q=85" alt="Barber pri radu" loading="lazy">
   </div>
-  <div class="gallery-masonry">
-    <div class="gallery-item reveal">
+  <div class="split-text">
+    <div class="eyebrow reveal">O nama</div>
+    <h2 class="reveal">Više od salona —<br><span style="color:#c9a96e;">iskustvo</span></h2>
+    <p class="reveal">St.Athena je mjesto gdje se susreću klasična barber tradicija i savremeni urbani stil.</p>
+    <p class="reveal">Svaki dolazak je priča za sebe — pažljivo osmišljena od ulaska do izlaska.</p>
+    <div class="stats-row reveal">
+      <div class="stat">
+        <div class="num">7+</div>
+        <div class="label">Godina</div>
+      </div>
+      <div class="stat">
+        <div class="num">5k+</div>
+        <div class="label">Klijenata</div>
+      </div>
+      <div class="stat">
+        <div class="num">4.9</div>
+        <div class="label">Ocena</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Horizontal Scroll -->
+<section class="gallery" id="gallery">
+  <div class="gallery-header">
+    <div>
+      <div class="eyebrow reveal">Galerija</div>
+      <h2 class="reveal">Naš rad</h2>
+    </div>
+  </div>
+  <div class="gallery-track" id="galleryTrack">
+    <div class="gallery-item">
       <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=500&q=80" alt="Klasično šišanje" loading="lazy">
-      <span class="overlay-text">Klasično šišanje</span>
+      <div class="gallery-item-info"><h4>Klasično šišanje</h4><p> Preciznost u svakom potezu</p></div>
     </div>
-    <div class="gallery-item reveal reveal-delay-1">
+    <div class="gallery-item">
       <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=500&q=80" alt="Moderni stil" loading="lazy">
-      <span class="overlay-text">Moderni stil</span>
+      <div class="gallery-item-info"><h4>Moderni stil</h4><p>Savremeni pristup</p></div>
     </div>
-    <div class="gallery-item reveal reveal-delay-2">
+    <div class="gallery-item">
       <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=500&q=80" alt="Brijanje" loading="lazy">
-      <span class="overlay-text">Tradicionalno brijanje</span>
+      <div class="gallery-item-info"><h4>Tradicionalno brijanje</h4><p>Vrući peškir i pena</p></div>
     </div>
-    <div class="gallery-item reveal">
+    <div class="gallery-item">
       <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=500&q=80" alt="Enterijer" loading="lazy">
-      <span class="overlay-text">Naš enterijer</span>
+      <div class="gallery-item-info"><h4>Naš enterijer</h4><p>Ambijent koji opušta</p></div>
     </div>
-    <div class="gallery-item reveal reveal-delay-1">
+    <div class="gallery-item">
       <img src="https://images.unsplash.com/photo-1675599193884-38c7a5ceecbc?w=500&q=80" alt="Barber u radu" loading="lazy">
-      <span class="overlay-text">Barber u radu</span>
+      <div class="gallery-item-info"><h4>Barber u radu</h4><p>Posvećenost detaljima</p></div>
     </div>
-    <div class="gallery-item reveal reveal-delay-2">
+    <div class="gallery-item">
       <img src="https://images.unsplash.com/photo-1582095133179-bfd08e2fc6b3?w=500&q=80" alt="Detalji" loading="lazy">
-      <span class="overlay-text">Posvećenost detaljima</span>
+      <div class="gallery-item-info"><h4>Detalji</h4><p>Pažljivo osmišljeno</p></div>
     </div>
   </div>
 </section>
 
-<section class="contact-section" id="contact">
+<!-- Toggle / Shift Section -->
+<section class="toggle-section">
+  <div class="toggle-rings">
+    <div class="toggle-ring toggle-ring-1"></div>
+    <div class="toggle-ring toggle-ring-2"></div>
+    <div class="toggle-ring toggle-ring-3"></div>
+    <div class="toggle-ring toggle-ring-4"></div>
+  </div>
+  <div class="toggle-content">
+    <div class="eyebrow reveal">Promena</div>
+    <h2 class="reveal">Od običnog do<br><span style="color:#c9a96e;">izvanrednog</span></h2>
+    <p class="reveal">Ne šišamo samo kosu — transformišemo način na koji se osećate.</p>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
   <div class="contact-inner">
-    <div class="contact-left reveal">
-      <div class="eyebrow">Kontakt</div>
-      <h2>Javite nam se — <span class="accent">tu smo za vas</span></h2>
-      <p>Bilo da želite da zakažete termin ili imate pitanje, slobodno nas kontaktirajte. Odgovorićemo vam u najkraćem roku.</p>
-      <div class="contact-details">
-        <div class="contact-detail">
-          <div class="contact-detail-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div class="contact-detail-text">
-            <div class="label">Lokacija</div>
-            <div class="value">Slavija, Beograd, Srbija</div>
-          </div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          </div>
-          <div class="contact-detail-text">
-            <div class="label">Telefon</div>
-            <div class="value"><a href="tel:+3816xxxxxxx">+381 6x xxx xxxx</a></div>
-          </div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <div class="contact-detail-text">
-            <div class="label">Email</div>
-            <div class="value"><a href="mailto:info@stathena.rs">info@stathena.rs</a></div>
-          </div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          </div>
-          <div class="contact-detail-text">
-            <div class="label">Instagram</div>
-            <div class="value"><a href="https://www.instagram.com/_st.athena_/" target="_blank" rel="noopener">@_st.athena_</a></div>
-          </div>
-        </div>
-      </div>
-      <div class="contact-hours">
-        <h3>Radno vreme</h3>
-        <ul class="hours-list">
-          <li><span>Pon - Pet</span><span>09:00 — 20:00</span></li>
-          <li><span>Subota</span><span>09:00 — 17:00</span></li>
-          <li><span>Nedelja</span><span>Zatvoreno</span></li>
-        </ul>
-      </div>
+    <div class="contact-left">
+      <div class="eyebrow reveal">Kontakt</div>
+      <h2 class="reveal">Javite nam se —<br><span class="accent">tu smo za vas</span></h2>
+      <p class="reveal">Bilo da želite da zakažete termin ili imate pitanje, slobodno nas kontaktirajte.</p>
+      <ul class="contact-info-list reveal">
+        <li>
+          <span class="label">Lokacija</span>
+          <span class="value">Slavija, Beograd</span>
+        </li>
+        <li>
+          <span class="label">Telefon</span>
+          <span class="value"><a href="tel:+3816xxxxxxx">+381 6x xxx xxxx</a></span>
+        </li>
+        <li>
+          <span class="label">Email</span>
+          <span class="value"><a href="mailto:info@stathena.rs">info@stathena.rs</a></span>
+        </li>
+        <li>
+          <span class="label">Instagram</span>
+          <span class="value"><a href="https://www.instagram.com/_st.athena_/" target="_blank" rel="noopener">@_st.athena_</a></span>
+        </li>
+        <li>
+          <span class="label">Radno vreme</span>
+          <span class="value">Pon-Sub 09-20</span>
+        </li>
+      </ul>
     </div>
-    <div class="contact-form-card reveal reveal-delay-2">
+    <div class="contact-form-wrap reveal">
       <h3>Pošaljite poruku</h3>
       <form id="contactForm" novalidate>
         <div class="form-row">
@@ -909,118 +992,250 @@
   </div>
 </section>
 
-<div class="map-section">
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2830.8!2d20.4646!3d44.8048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475a7093e78a5c5d%3A0x400e6e1e0846a330!2sSlavija%2C%20Beograd!5e0!3m2!1ssr!2srs!4v1" allowfullscreen loading="lazy" title="Lokacija St.Athena salona na Slaviji u Beogradu"></iframe>
-  <div class="map-overlay"></div>
-</div>
-
+<!-- Footer -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-brand">St.Athena</div>
-    <div class="footer-links">
-      <a href="#about">O nama</a>
-      <a href="#services">Usluge</a>
-      <a href="#gallery">Galerija</a>
-      <a href="#contact">Kontakt</a>
+    <div>
+      <div class="footer-brand">St.Athena</div>
+      <p class="footer-brand-desc">Premium barbershop iskustvo u srcu Beograda. Klasična tradicija, savremeni pristup.</p>
     </div>
-    <div class="footer-social">
-      <a href="https://www.instagram.com/_st.athena_/" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-      </a>
+    <div class="footer-col">
+      <h4>Navigacija</h4>
+      <ul>
+        <li><a href="#about">O nama</a></li>
+        <li><a href="#services">Usluge</a></li>
+        <li><a href="#gallery">Galerija</a></li>
+        <li><a href="#contact">Kontakt</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kontakt</h4>
+      <ul>
+        <li><a href="tel:+3816xxxxxxx">+381 6x xxx xxxx</a></li>
+        <li><a href="mailto:info@stathena.rs">info@stathena.rs</a></li>
+        <li><a href="https://www.instagram.com/_st.athena_/" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
     </div>
   </div>
   <div class="footer-bottom">
     <p>&copy; 2026 St.Athena — Beograd. Sva prava zadržana.</p>
+    <div class="footer-socials">
+      <a href="https://www.instagram.com/_st.athena_/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+    </div>
   </div>
 </footer>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
+document.documentElement.classList.add('has-reveal');
+
+// ── Preloader ──
+(function() {
+  const preloader = document.getElementById('preloader');
+  const bar = document.getElementById('preloaderBar');
+  const percent = document.getElementById('preloaderPercent');
+  const logo = document.getElementById('preloaderLogo');
+  let progress = 0;
+
+  gsap.to(logo, { opacity: 1, y: 0, duration: 0.8, delay: 0.2 });
+
+  const interval = setInterval(() => {
+    progress += Math.random() * 15 + 5;
+    if (progress > 100) progress = 100;
+    bar.style.width = progress + '%';
+    percent.textContent = Math.round(progress) + '%';
+    if (progress >= 100) {
+      clearInterval(interval);
+      setTimeout(() => {
+        gsap.to(preloader, {
+          yPercent: -100, duration: 1,
+          ease: 'power4.inOut',
+          onComplete: () => { preloader.classList.add('done'); preloader.style.display = 'none'; initAnimations(); }
+        });
+      }, 400);
+    }
+  }, 120);
+})();
+
+// ── Custom Cursor ──
+(function() {
+  const cursor = document.getElementById('cursor');
+  if (window.matchMedia('(hover: hover)').matches) {
+    let mx = 0, my = 0, cx = 0, cy = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    (function loop() {
+      cx += (mx - cx) * 0.15;
+      cy += (my - cy) * 0.15;
+      cursor.style.left = cx + 'px';
+      cursor.style.top = cy + 'px';
+      requestAnimationFrame(loop);
+    })();
+    document.querySelectorAll('a, button, .service-card, .gallery-item').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
     });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  } else {
+    cursor.style.display = 'none';
+  }
+})();
 
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.pageYOffset > 100);
-  }, { passive: true });
+// ── Animations ──
+function initAnimations() {
+  gsap.registerPlugin(ScrollTrigger);
 
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Hero word-by-word
+  gsap.to('.hero-word-inner', {
+    y: 0, duration: 1.2, stagger: 0.08,
+    ease: 'power4.out', delay: 0.3
+  });
+  gsap.to('#heroTag', { opacity: 1, duration: 1, delay: 1.2 });
+  gsap.to('#heroSub', { opacity: 1, duration: 1, delay: 1.5 });
+
+  // Statement word-by-word
+  ScrollTrigger.create({
+    trigger: '.statement',
+    start: 'top 80%',
+    onEnter: () => {
+      gsap.to('.statement-line-inner', {
+        y: 0, duration: 1, stagger: 0.06,
+        ease: 'power4.out'
+      });
+    },
+    once: true
+  });
+
+  // General reveals
+  document.querySelectorAll('.reveal').forEach(el => {
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 88%',
+      onEnter: () => el.classList.add('is-visible'),
+      once: true
     });
   });
 
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    const formStatus = document.getElementById('formStatus');
-    const submitBtn = document.getElementById('formSubmitBtn');
+  // Rings parallax
+  gsap.to('.ring-1', {
+    scrollTrigger: { trigger: '.rings-section', start: 'top bottom', end: 'bottom top', scrub: 1 },
+    scale: 1.3, opacity: 0
+  });
+  gsap.to('.ring-2', {
+    scrollTrigger: { trigger: '.rings-section', start: 'top bottom', end: 'bottom top', scrub: 1 },
+    scale: 1.2, opacity: 0
+  });
+  gsap.to('.ring-3', {
+    scrollTrigger: { trigger: '.rings-section', start: 'top bottom', end: 'bottom top', scrub: 1 },
+    scale: 1.15, opacity: 0
+  });
 
-    function showError(fieldId) {
-      const group = document.getElementById(fieldId).closest('.form-group');
-      if (group) group.classList.add('error');
-    }
-    function clearErrors() {
-      document.querySelectorAll('.form-group.error').forEach(el => el.classList.remove('error'));
-    }
-    function validateField(id, validator) {
-      const field = document.getElementById(id);
-      if (!validator(field.value)) { showError(id); return false; }
-      return true;
-    }
-
-    contactForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      clearErrors();
-      formStatus.className = 'form-status';
-      formStatus.style.display = 'none';
-
-      const name = document.getElementById('formName').value.trim();
-      const email = document.getElementById('formEmail').value.trim();
-      const phone = document.getElementById('formPhone').value.trim();
-      const message = document.getElementById('formMessage').value.trim();
-
-      let valid = true;
-      valid &= validateField('formName', v => v.length >= 2);
-      valid &= validateField('formEmail', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
-      valid &= validateField('formMessage', v => v.length >= 5);
-      if (!valid) return;
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Slanje...';
-      formStatus.textContent = 'Slanje poruke...';
-      formStatus.className = 'form-status sending';
-      formStatus.style.display = 'block';
-
-      try {
-        await fetch('https://formsubmit.co/ajax/jenic.daki@gmail.com', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({ name, email, phone, message, _subject: 'Poruka sa St.Athena sajta' })
-        });
-        formStatus.textContent = 'Hvala! Poruka je poslata. Odgovorićemo uskoro.';
-      } catch {
-        formStatus.textContent = 'Hvala! Poruka je poslata. Odgovorićemo uskoro.';
+  // Gallery horizontal scroll
+  const galleryTrack = document.getElementById('galleryTrack');
+  if (galleryTrack) {
+    const totalScroll = galleryTrack.scrollWidth - window.innerWidth;
+    gsap.to(galleryTrack, {
+      x: -totalScroll,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.gallery',
+        start: 'top top',
+        end: () => '+=' + totalScroll,
+        scrub: 1,
+        pin: true,
+        anticipatePin: 1
       }
-
-      formStatus.className = 'form-status success';
-      formStatus.style.display = 'block';
-      contactForm.reset();
-      submitBtn.textContent = 'Pošalji poruku';
-      submitBtn.disabled = false;
-    });
-
-    document.querySelectorAll('.form-group input, .form-group textarea').forEach(field => {
-      field.addEventListener('input', function() {
-        this.closest('.form-group')?.classList.remove('error');
-      });
     });
   }
-</script>
 
+  // Service cards stagger
+  gsap.utils.toArray('.service-card').forEach((card, i) => {
+    gsap.from(card, {
+      scrollTrigger: { trigger: card, start: 'top 90%', once: true },
+      opacity: 0, y: 40, duration: 0.8,
+      delay: (i % 3) * 0.12,
+      ease: 'power3.out'
+    });
+  });
+
+  // Split image parallax
+  gsap.to('.split-image img', {
+    yPercent: 15,
+    scrollTrigger: { trigger: '.split', start: 'top bottom', end: 'bottom top', scrub: 1 }
+  });
+
+  // Toggle rings rotation
+  gsap.to('.toggle-ring-1', {
+    rotation: 360, repeat: -1, duration: 20, ease: 'none'
+  });
+  gsap.to('.toggle-ring-2', {
+    rotation: -360, repeat: -1, duration: 30, ease: 'none'
+  });
+  gsap.to('.toggle-ring-3', {
+    rotation: 360, repeat: -1, duration: 40, ease: 'none'
+  });
+}
+
+// ── Form ──
+(function() {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+  const status = document.getElementById('formStatus');
+  const btn = document.getElementById('formSubmitBtn');
+
+  function showError(id) {
+    const g = document.getElementById(id).closest('.form-group');
+    if (g) g.classList.add('error');
+  }
+  function clearErrors() {
+    document.querySelectorAll('.form-group.error').forEach(el => el.classList.remove('error'));
+  }
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    clearErrors();
+    status.className = 'form-status'; status.style.display = 'none';
+
+    const name = document.getElementById('formName').value.trim();
+    const email = document.getElementById('formEmail').value.trim();
+    const phone = document.getElementById('formPhone').value.trim();
+    const message = document.getElementById('formMessage').value.trim();
+
+    let ok = true;
+    ok &= name.length >= 2 ? true : (showError('formName'), false);
+    ok &= /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? true : (showError('formEmail'), false);
+    ok &= message.length >= 5 ? true : (showError('formMessage'), false);
+    if (!ok) return;
+
+    btn.disabled = true; btn.textContent = 'Slanje...';
+    status.textContent = 'Slanje poruke...';
+    status.className = 'form-status sending'; status.style.display = 'block';
+
+    try {
+      await fetch('https://formsubmit.co/ajax/jenic.daki@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name, email, phone, message, _subject: 'Poruka sa St.Athena sajta' })
+      });
+    } catch {}
+
+    status.textContent = 'Hvala! Poruka je poslata.';
+    status.className = 'form-status success'; status.style.display = 'block';
+    form.reset(); btn.textContent = 'Pošalji poruku'; btn.disabled = false;
+  });
+
+  document.querySelectorAll('.form-group input, .form-group textarea').forEach(f => {
+    f.addEventListener('input', () => f.closest('.form-group')?.classList.remove('error'));
+  });
+})();
+
+// ── Smooth anchor scroll ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
 </body>
 </html>
